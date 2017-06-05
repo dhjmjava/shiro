@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>shiro</groupId>
+  <artifactId>demo03</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>demo03 Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+   <properties>  
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    </properties>  
+    <!-- Inherit defaults from Spring Boot -->  
+    <parent>  
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-starter-parent</artifactId>  
+       <!-- <version>1.4.0.RELEASE</version>  --> 
+        <version>1.2.6.RELEASE</version>  
+    </parent>  
+    <dependencies>  
+        <!-- spring boot web支持：mvc,aop... -->  
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-web</artifactId>  
+        </dependency>  
+        <!-- thmleaf模板依赖. -->  
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>  
+        </dependency>  
+        <!-- apache shiro --> 
+        <dependency>  
+           <groupId>org.apache.shiro</groupId>  
+           <artifactId>shiro-spring</artifactId>  
+           <version>1.2.3</version>  
+       </dependency> 
+       <!-- 数据库连接池 -->
+       <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.18</version>
+       </dependency>
+       
+        <!-- jpa依赖 -->
+       <dependency>  
+           <groupId>org.springframework.boot</groupId>  
+           <artifactId>spring-boot-starter-data-jpa</artifactId>  
+       </dependency>  
+        
+       <!-- mysql驱动; -->  
+       <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
+		</dependency> 
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+ 
+    <!-- 提供者为tomcat  -->
+	 <dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-servlet-api</artifactId>
+		<version>7.0.68</version>
+		<scope>provided</scope>
+	 </dependency>
+	 
+	 <!-- json解析框架 -->
+    <dependency>
+       <groupId>com.alibaba</groupId>
+       <artifactId>fastjson</artifactId>
+       <version>1.2.15</version>
+    </dependency>
+    
+    <!-- 添加监控 -->
+    <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    
+	  <!-- 热部署 -->
+	  <dependency> 
+         <groupId>org.springframework</groupId> 
+         <artifactId>springloaded</artifactId> 
+         <version>1.2.4.RELEASE</version>
+     </dependency>
+
+
+	  <dependency>
+	  	<groupId>org.testng</groupId>
+	  	<artifactId>testng</artifactId>
+	  	<version>6.8.13</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>org.neo4j</groupId>
+	  	<artifactId>neo4j-cypher-compiler-2.1</artifactId>
+	  	<version>2.1.5</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>org.springframework.data</groupId>
+	  	<artifactId>spring-data-neo4j</artifactId>
+	  </dependency>
+    </dependencies>  
+  <build>
+    <finalName>demo03</finalName>
+     <plugins> 
+          <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+          </plugin>
+         <plugin>
+			 <artifactId>maven-compiler-plugin</artifactId>
+			 <configuration>
+			     <source>1.7</source>
+			     <target>1.7</target>
+			 </configuration>
+        </plugin>
+        </plugins>
+  </build>
+</project>
