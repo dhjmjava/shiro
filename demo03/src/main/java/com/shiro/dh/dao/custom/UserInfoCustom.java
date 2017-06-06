@@ -7,7 +7,12 @@
  *  
 */  
   
-package com.shiro.dh.dao.custom;  
+package com.shiro.dh.dao.custom;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 /**  
  * ClassName:UserInfoCustom <br/>  
  * Function: 用于实现自定义查询. <br/>  
@@ -17,7 +22,10 @@ package com.shiro.dh.dao.custom;
  * @since    JDK 1.7  
  * @see        
  */
-public class UserInfoCustom {
+@Repository
+public interface UserInfoCustom {
+	
+	int deleteByIds(List<Long> ids);
      
 	
 }

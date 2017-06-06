@@ -8,17 +8,10 @@
  */
 package com.shiro.dh.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.shiro.dh.service.FoodService;
-
 /**
  * @author Administrator
  *
  */
 public class BaseController {
-	
-	@Autowired
-	protected FoodService foodServiceImpl;
 
 }

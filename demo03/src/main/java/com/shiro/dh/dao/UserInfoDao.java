@@ -1,8 +1,11 @@
 package com.shiro.dh.dao;
 
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.findShortestPaths;
-import org.springframework.data.repository.CrudRepository;
+import java.io.Serializable;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.shiro.dh.dao.custom.UserInfoCustom;
 import com.shiro.dh.entity.UserInfo;
 
 /**  
@@ -18,7 +21,7 @@ import com.shiro.dh.entity.UserInfo;
  * @author Administrator
  *
  */
-public interface UserInfoDao extends BaseRepository<UserInfo>{
+public interface UserInfoDao extends PagingAndSortingRepository<UserInfo, String> ,UserInfoCustom,BaseDao<UserInfo>{
 	
 	UserInfo findByUsername(String username);
 	
