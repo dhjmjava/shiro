@@ -25,7 +25,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserInfoCustom {
 	
-	int deleteByIds(List<Long> ids);
+	int deleteByUids(List<Long> ids);
      
 	
 }

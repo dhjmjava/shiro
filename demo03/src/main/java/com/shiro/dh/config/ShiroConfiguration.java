@@ -12,7 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;  
   
 
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;  
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;  
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;  
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;  
@@ -63,7 +64,8 @@ public class ShiroConfiguration {
 	 }
    
     /**
-     * myShiroRealm:用于身份认证. <br/>   
+     * myShiroRealm:用于身份认证. <br/>
+     * ShiroRealm是shiro的核心。各任务都将交给其处理   
      * @author daihui 
      * @return  
      * @since JDK 1.7
@@ -71,7 +73,8 @@ public class ShiroConfiguration {
    @Bean  
    public ShiroRealm myShiroRealm() {  
         ShiroRealm myShiroRealm = new ShiroRealm();  
-        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());  
+        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        myShiroRealm.setCacheManager(ehCacheManager());//注入ehcache缓存
         return myShiroRealm;  
     } 
     
@@ -91,11 +94,25 @@ public class ShiroConfiguration {
         
        return hashedCredentialsMatcher;  
     }  
+    
+    /**
+     * shiro缓存管理器;
+     * 需要注入对应的其它的实体类中：
+     * 1、安全管理器：securityManager
+     * @return
+     */
+    @Bean
+    public EhCacheManager ehCacheManager(){
+       System.out.println("ShiroConfiguration.getEhCacheManager()");
+       EhCacheManager cacheManager = new EhCacheManager();
+       cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+       return cacheManager;
+    }
       
     
     /**  
      *  开启shiro aop注解支持.  
-     *  使用代理方式;所以需要开启代码支持;  
+     *  使用代理方式，所以需要开启代码支持;  
      * @param securityManager  
      * @return  
      */  

@@ -70,9 +70,8 @@ public class ShiroRealm extends AuthorizingRealm{
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {  
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");  
-        Object primaryPrincipal = principals.getPrimaryPrincipal();
-        System.out.println(primaryPrincipal.toString());
-        UserInfo userInfo = (UserInfo) principals.getPrimaryPrincipal();  
+        String username = (String)principals.getPrimaryPrincipal();
+        UserInfo userInfo = userInfoService.findByUsername(username);  
           
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         for(SysRole role:userInfo.getRoleList()){  

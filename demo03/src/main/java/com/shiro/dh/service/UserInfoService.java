@@ -15,6 +15,13 @@ import com.shiro.dh.entity.UserInfo;
  *
  */
 public interface UserInfoService {
-	public UserInfo findByUsername(String username); 
+	
+    UserInfo findByUsername(String username); 
+    
+    UserInfo findByUid(long uid);
+    
+    void deleteByUid(long uid);
+    
+    UserInfo saveUser(UserInfo userInfo);
 
 }
