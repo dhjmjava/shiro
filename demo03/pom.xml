@@ -34,6 +34,13 @@
            <artifactId>shiro-spring</artifactId>  
            <version>1.2.3</version>  
        </dependency> 
+       
+       <dependency>  
+		   <groupId>com.github.theborakompanioni</groupId>  
+		   <artifactId>thymeleaf-extras-shiro</artifactId>  
+		   <version>2.0.0</version>  
+	  </dependency>  
+		       
        <!-- 数据库连接池 -->
        <dependency>
             <groupId>com.alibaba</groupId>
