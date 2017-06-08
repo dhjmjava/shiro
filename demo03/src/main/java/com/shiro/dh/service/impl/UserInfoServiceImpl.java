@@ -30,6 +30,22 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override  
     public UserInfo findByUsername(String username) {  
         return userInfoRepository.findByUsername(username);  
-    }  
+    }
+
+	@Override
+	public UserInfo findByUid(long uid) {
+		return userInfoRepository.findOne(uid);
+	}
+
+	@Override
+	public void deleteByUid(long uid) {
+		 userInfoRepository.delete(uid);;
+	}
+
+	@Override
+	public UserInfo saveUser(UserInfo userInfo) {
+		return userInfoRepository.save(userInfo);
+	}
+	
 
 }

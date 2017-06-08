@@ -11,6 +11,9 @@ package com.shiro.dh.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.dao.custom.UserInfoCustom;
@@ -26,10 +29,12 @@ import com.shiro.dh.dao.custom.UserInfoCustom;
  */
 @Repository("LinkDaoCustom") 
 public class UserInfoDaoImpl implements UserInfoCustom{
+	
+	@Autowired
+	private EntityManager em;
 
 	@Override
-	public int deleteByIds(List<Long> ids) {
-		  
+	public int deleteByUids(List<Long> ids) {
 		return 0;
 		
 	}
