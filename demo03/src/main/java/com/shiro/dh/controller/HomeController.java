@@ -29,19 +29,19 @@ public class HomeController extends BaseController{
     } 
 	
 	@RequestMapping("/userInfo")  
-	@RequiresPermissions("userInfo:view")
+	@RequiresPermissions("blog:view")
 	public String userInfo() { 
 		return "userInfo";  
 	}  
 	
 	@RequestMapping("/userAdd")  
-	@RequiresPermissions("userInfo:add")
+	@RequiresPermissions("blog:add")
 	public String userAdd(Model model) { 
 		return "userInfoAdd";  
 	}
 	
 	@RequestMapping("/userDel")
-	@RequiresPermissions("userInfo:del")
+	@RequiresPermissions("blog:del")
 	public String userDel(Model model) { 
 		return "userDel";  
 	}  

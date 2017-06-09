@@ -1,15 +1,15 @@
 <!DOCTYPE html>  
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> 
+     xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"> 
 <head>  
 <meta charset="UTF-8" />  
 <title>Insert title here</title>  
 </head>  
 <body>  
     <h3>登录成功 INDEX PAGE </h3> <br/>
-    <a href="/userAdd">USER INFO ADD</a><br/>
-    <a href="/userInfo">USER INFO</a><br/>
-    <a href="/userDel">USER DEL</a><br/>
+    <a shiro:hasPermission="blog:add" href="/userAdd">USER INFO ADD</a><br/>
+    <a shiro:hasPermission="blog:view" href="/userInfo">USER INFO</a><br/>
+    <a shiro:hasPermission="blog:del" href="/userDel">USER DEL</a><br/>
     <a href="/logout">LOGOUT</a>
       
 </body>  

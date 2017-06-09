@@ -1,8 +1,5 @@
 package com.shiro.dh.dao;
 
-import java.io.Serializable;
-
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +15,6 @@ import com.shiro.dh.entity.UserInfo;
  *  
  */
 
-/**
- * @author Administrator
- *
- */
 @Repository
 public interface UserInfoDao extends PagingAndSortingRepository<UserInfo,Long> ,UserInfoCustom{
 	
