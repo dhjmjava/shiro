@@ -125,9 +125,10 @@ public class ShiroConfiguration {
        return authorizationAttributeSourceAdvisor;  
     }  
     
-    @Bean
-    public ShiroDialect shiroDialect(){
-    	return new ShiroDialect();
+
+    @Bean  
+    public ShiroDialect shiroDialect(){  
+    	return new ShiroDialect();  
     }
   
 

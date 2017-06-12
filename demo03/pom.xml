@@ -41,13 +41,29 @@
            <artifactId>shiro-ehcache</artifactId>
            <version>1.2.2</version>
        </dependency> 
+       <!-- shiro ehcache -->
+       <dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-ehcache</artifactId>
+           <version>1.2.2</version>
+       </dependency>
        
        <dependency>  
-		   <groupId>com.github.theborakompanioni</groupId>  
-		   <artifactId>thymeleaf-extras-shiro</artifactId>  
-		   <version>1.2.1</version>  
-	  </dependency>  
-		       
+		    <groupId>com.github.theborakompanioni</groupId>  
+		    <artifactId>thymeleaf-extras-shiro</artifactId>  
+		    <version>1.2.1</version>  
+	   </dependency>  
+       <!--
+	           包含支持UI模版（Velocity，FreeMarker，JasperReports），
+	           邮件服务，
+	           脚本服务(JRuby)，
+	           缓存Cache（EHCache），
+	           任务计划Scheduling（quartz）。
+        -->
+       <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+        </dependency>
        <!-- 数据库连接池 -->
        <dependency>
             <groupId>com.alibaba</groupId>
