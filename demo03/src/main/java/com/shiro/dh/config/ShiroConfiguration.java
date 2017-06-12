@@ -23,6 +23,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.shiro.dh.realms.ShiroRealm;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+
 /**
  * @author Administrator
  *
@@ -122,6 +124,11 @@ public class ShiroConfiguration {
        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);  
        return authorizationAttributeSourceAdvisor;  
     }  
+    
+    @Bean
+    public ShiroDialect shiroDialect(){
+    	return new ShiroDialect();
+    }
   
 
 }
