@@ -54,8 +54,8 @@ public class ShiroRealm extends AuthorizingRealm{
   
         //密码比对
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-        		username, // 用户名  
-                userInfo.getPassword(), // 密码  
+        		userInfo.getUsername(), // 用户名  
+        		userInfo.getPassword(), // 密码  
                 ByteSource.Util.bytes(userInfo.getCredentialsSalt()), // salt=username+salt  
                 getName() // realm name  
         );  
@@ -88,7 +88,7 @@ public class ShiroRealm extends AuthorizingRealm{
     public static void main(String[] args) {
 		String algorithmName="MD5";//加密算法名称
 		Object source="123456";//需要加密的内容
-		Object salt="daihui"; //加密盐值
+		Object salt="admin"; //加密盐值
 		int hashIterations=9;//加密次数
 		Object result = new  SimpleHash(algorithmName, source, salt, hashIterations);
 		System.out.println(result.toString());
