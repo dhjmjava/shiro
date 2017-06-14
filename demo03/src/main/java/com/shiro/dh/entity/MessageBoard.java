@@ -14,6 +14,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -44,6 +45,7 @@ public class MessageBoard implements Serializable{
 	public MessageBoard(){}
 
 	@Id
+	@GeneratedValue
 	@Column(name="msg_id")
 	public int getMessageId() {
 		return messageId;
