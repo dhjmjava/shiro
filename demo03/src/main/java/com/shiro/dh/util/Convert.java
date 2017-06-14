@@ -22,16 +22,54 @@ import java.util.List;
  */
 public class Convert<T> {
 	
-	public  List<T> iterableToList(Iterable<T> iterable){
-		if(iterable==null){
-			return null;
+	public static int strToInt(String str, int defaultValue) {
+		int Result = defaultValue;
+		try {
+			Result = Integer.parseInt(str);
+		} catch (Exception e) {
 		}
-		List<T> list = new ArrayList<>();
-		for (T e : iterable) {
-			list.add(e);
+
+		return Result;
+	}
+
+	public static long strToLong(String str, long defaultValue) {
+		long Result = defaultValue;
+		try {
+			Result = Long.parseLong(str);
+		} catch (Exception e) {
 		}
-		
-		return list;
+
+		return Result;
+	}
+
+	public static float strToFloat(String str, float defaultValue) {
+		float Result = defaultValue;
+		try {
+			Result = Float.parseFloat(str);
+		} catch (Exception e) {
+		}
+
+		return Result;
+	}
+
+	public static double strToDouble(String str, double defaultValue) {
+		double Result = defaultValue;
+		try {
+			Result = Double.parseDouble(str);
+		} catch (Exception e) {
+		}
+
+		return Result;
+	}
+
+	public static boolean strToBoolean(String str, boolean defaultValue) {
+		boolean Result = defaultValue;
+		try {
+			Result = Boolean.parseBoolean(str);
+		} catch (Exception e) {
+		}
+
+		return Result;
 	}
 
 }
