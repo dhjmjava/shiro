@@ -27,12 +27,12 @@ import com.shiro.dh.service.BlogTypesService;
  * @see        
  */
 @Service
-public class BlogTypesServiceImpl extends BaseService<BlogTypes> implements BlogTypesService {
+public class BlogTypesServiceImpl extends BaseService implements BlogTypesService {
 
 	@Override
 	public List<BlogTypes> getAllBlogTypes() {
 		
-		return iterableToList(blogTypesDao.findAll());
+		return blogTypesDao.findAll();
 		
 	}
 

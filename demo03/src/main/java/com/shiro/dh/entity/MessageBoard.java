@@ -12,6 +12,11 @@ package com.shiro.dh.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**  
  * ClassName:MessageBoard <br/>  
  * Function: 留言板. <br/>  
@@ -21,13 +26,10 @@ import java.util.Date;
  * @since    JDK 1.7  
  * @see        
  */
+@Entity
+@Table(name="t_message_board")
 public class MessageBoard implements Serializable{
 	
-	/**  
-	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).  
-	 * @since JDK 1.7  
-	 */
-	 
 	private static final long serialVersionUID = -8957261577189231998L;
 	
 	private int messageId;
@@ -41,6 +43,8 @@ public class MessageBoard implements Serializable{
 	
 	public MessageBoard(){}
 
+	@Id
+	@Column(name="msg_id")
 	public int getMessageId() {
 		return messageId;
 	}
@@ -49,6 +53,7 @@ public class MessageBoard implements Serializable{
 		this.messageId = messageId;
 	}
 
+	@Column(name="msg_content")
 	public String getMsgContent() {
 		return msgContent;
 	}
@@ -57,6 +62,7 @@ public class MessageBoard implements Serializable{
 		this.msgContent = msgContent;
 	}
 
+	@Column(name="publish_time")
 	public Date getPublishTime() {
 		return publishTime;
 	}
@@ -65,7 +71,7 @@ public class MessageBoard implements Serializable{
 		this.publishTime = publishTime;
 	}
 	
-	
+	@Column(name="username")
 	public String getUserName() {
 		return userName;
 	}
@@ -98,6 +104,7 @@ public class MessageBoard implements Serializable{
 		this.status = status;
 	}
 
+	@Column(name="is_use")
 	public boolean isUse() {
 		return isUse;
 	}

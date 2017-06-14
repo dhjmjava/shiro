@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/blog.css}"/>
+	<script th:src="@{/bootstrap3/js/jquery-1.11.2.min.js}"></script>
+	<script th:src="@{/bootstrap3/js/bootstrap.min.js}"></script>
+	<title>源码下载</title>
+	<link rel="icon" th:href="@{./images/apple-touch-icon.png}" type="image/x-icon" />
+	<style type="text/css">
+	  .summary font{
+	     font-size:18px;
+	  }
+	</style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部  -->
+	<div id="header" th:include="common/header :: copy"></div>
+	
+	<div class="row">
+	  <div class="col-md-9">
+	  	<div class="data_list">
+	  		<div class="data_list_title">
+			<img th:src="@{/images/list_icon.png}"/>本站源码下载</div>
+	  		
+	  		<div class="datas">
+			    <span class="summary">
+			        <font color="red">V2.2 2017年6月1号发布</font><br/><br/>
+					<font>本站使用Springboot+Mybatis3架构；</font><br/><br/>
+					<font>采用Mysql数据库,Druid数据库连接池；</font><br/><br/>
+					<font>使用Maven3构建项目，git进行项目管理；</font><br/><br/>
+					<font>前后网页使用thymeleaf模板引擎与Bootstrap3UI框架，后台使用easyui编写；</font><br/><br/>
+					<font>在线编辑器使用百度的UEditor，支持单图，多图上传，截图上传；</font><br/><br/>
+					<font>github下载地址：<a href="https://github.com/dhjmjava/blog">https://github.com/dhjmjava/blog</a></font><br/><br/>
+					<font>github主页：<a href="https://github.com/dhjmjava"> https://github.com/dhjmjava</a></font>
+					<hr/>
+					<font color="red">预计下次更新类容</font><br/><br/>
+					<font>1.基于shiro的完整的权限控制系统</font><br/><br/>
+					<font>2.后台完善</font><br/><br/>
+					<hr/>
+					<font color="red">V2.0 2016年11月11号发布</font><br/><br/>
+					<font>1.添加lucene全文检索，完善关键字查询</font><br/><br/>
+					<font>2.更改为git管理项目，方便发布与下载</font><br/><br/>
+					<font>3.修复后台部分bug</font><br/><br/>
+					<hr/>
+					<font color="red">V2.1 2017年1月1号发布</font><br/><br/>
+					<font>1.集成redis缓存，防止恶意刷新</font><br/><br/>
+					<font>2.修复lucene检索修改，删除出错的问题</font><br/><br/>
+					<font>3.后台页面完善</font><br/><br/>
+					<hr/>
+					<font color="red">V2.2 2017年6月1号发布</font><br/><br/>
+					<font>1.前后台页面整改，后台替换为easyui编写</font><br/><br/>
+					<font>2.修复lucene检索修改，删除出错的问题</font><br/><br/>
+					<font>3.后台页面完善</font><br/><br/>
+				</span>
+	  		</div>
+	  	</div>
+	  </div>
+	  
+	    <!-- 右边  -->
+		<div id="right" th:include="common/right :: righter"></div>
+		
+		</div>
+		
+		<!-- 底部 -->
+		<div id="foot" th:include="common/footer :: foot"></div>
+	</div>
+	<form action="/blog" accept-charset="UTF-8" method="GET"  id="homeForm">
+		<input type="hidden" name="typeId" id="typeId" th:value="${typeId}"/>
+		<input type="hidden" name="searchDate" id="searchDate" th:value="${searchDate}"/>
+		<input type="hidden" name="currPage" id="currPage" th:value="${currPage}" />
+    </form>
+    
+	<script type="text/javascript" th:inline="javascript">
+	    var currPage=[[${currPage}]];
+	</script> 
+	<script th:src="@{/javascript/home.js}"></script>
+	<script th:src="@{/javascript/blogInfo.js}"></script>
+  </body>
+</html>

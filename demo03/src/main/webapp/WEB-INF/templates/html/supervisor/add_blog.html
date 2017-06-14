@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>添加博客</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/supervisor/supervisor.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}"/>
+	<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/utf8-jsp/ueditor.config.js}" charset="UTF-8"></script>
+    <script type="text/javascript" th:src="@{/utf8-jsp/ueditor.all.min.js}" charset="UTF-8"> </script>
+    <link rel="stylesheet" type="text/css" th:href="@{/utf8-jsp/themes/default/css/ueditor.css}"/>
+    <script type="text/javascript" th:src="@{/datimeday/WdatePicker.js}"></script>
+    <script type="text/javascript" th:src="@{/javascript/common.js}"></script>
+</head>
+<body>
+ <script type="text/javascript"  th:inline="javascript">
+    /* 引入百度ueditor */
+	var ue = UE.getEditor("content");
+   $(function(){
+	   $("#smBtn").on("click",function(){
+		   var datas = $("#blogFrom").serializeObject();  
+	       $.post('/supervisor/submit_blog',datas,function(data){
+				if(data.code==-1){
+					alert(data.msg);
+				}else{
+					window.location.reload();
+				}
+			}); 
+	    	
+	    }); 
+   }) 
+ </script>
+	 <form id="blogFrom" method="post">
+	  <table id="blogTB" style="width:100%;border:1px solid red">
+	     <tr>
+		     <td style="text-align: right;width:10%"><label for="title">标题:</label></td>
+		     <td><input class="easyui-validatebox datas" data-options="missingMessage:'标题不能为空！'" type="text" name="title" required="true"/></td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="blogType">所属类别:</label></td>
+		     <td><input name="blogType" class="easyui-combobox" style="border:1px solid #ccc;height:30px;width:250px;border-radius: 5px;"
+	            data-options="url:'/supervisor/findAllTypes',panelHeight:'auto',editable:false,valueField:'id',textField:'name',width:140" />
+	          </td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="keyword">关键词:</label></td>
+		     <td><input class="easyui-validatebox datas" data-options="missingMessage:'多个关键词请用‘，’隔开！'" type="text" name="keyword" required="true"/></td>
+	     </tr>
+	      <tr>
+		     <td style="text-align: right"><label for="publishTime">发布时间:</label></td>
+		     <td>
+		      <input class="datas Wdate"  onclick="WdatePicker()" name="publishTime" type="text" />
+		     </td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="readCount">阅读量:</label></td>
+		     <td>
+		      <input class="datas" name="readCount" type="text"/>
+		     </td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="isUse">是否显示:</label></td>
+		     <td>
+			     <input style="height:30px;" type="radio" name="isUse" value="true"/><span style="font-size: 20px">显示</span>&nbsp;
+			     <input style="height:30px;" type="radio" name="isUse" value="false"/><span style="font-size: 20px">隐藏</span>
+		     </td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="content">内容:</label></td>
+		     <td style="width:90%"> <textarea rows="25" cols="155" id="content" name="content" style="width：100%"></textarea></td>
+	     </tr>
+	     <tr style="border:1px solid blue">
+		     <td colspan="2" style="text-align: center">
+		    	<input id="smBtn" style="width:50px;heigh:30px" type="button" value="提交"/>
+		    	<input style="width:50px;heigh:30px" type="button" value="返回"/>
+		     </td>
+	     </tr>
+	  </table>
+	</form>
+</body>
+</html>

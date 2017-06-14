@@ -31,12 +31,12 @@ import com.shiro.dh.service.MessageBoardService;
  * @see        
  */
 @Service
-public class MessageBoardServiceImpl extends BaseService<MessageBoard> implements MessageBoardService{
+public class MessageBoardServiceImpl extends BaseService implements MessageBoardService{
 
 	@Override
 	public List<MessageBoard> queryAll() {
 		
-		return iterableToList(messageBoardDao.findAll());
+		return messageBoardDao.findAll();
 		
 	}
 

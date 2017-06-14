@@ -1,0 +1,75 @@
+<div id="right" th:fragment="righter">
+	<div class="col-md-3">
+	  		<div class="data_list">
+				<div class="data_list_title">
+					<img th:src="@{/images/user_icon.png}"/>
+					博主信息
+				</div>
+				<div class="user_image">
+					<img th:src="@{/images/bqb.jpg}"/>
+				</div>
+				<div class="userSign" id="userSign"></div>
+			</div>
+	  	
+	  		<div class="data_list">
+				<div class="data_list_title">
+				<span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+					<!-- <img th:src="@{/images/byType_icon.png}"/> -->
+					按日志类别
+				</div>
+				<div class="datas">
+					<ul id="types">
+					</ul>
+				</div>
+			</div>
+	  		
+			<div class="data_list">
+				<div class="data_list_title">
+					<img th:src="@{/images/byDate_icon.png}"/>
+					按日志日期
+				</div>
+				<div class="datas">
+					<ul id="dates">
+					</ul>
+				</div>
+			</div>
+			
+			<div class="data_list">
+				<div class="data_list_title">
+					<img th:src="@{/images/link_icon.png}"/>
+					友情链接
+				</div>
+				<div class="datas">
+					<ul id="links">
+					</ul>
+				</div>
+			</div>
+			
+			<div class="data_list">
+				<div class="data_list_title">
+					<!-- <img th:src="@{/images/link_icon.png}"/> -->
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					最近留言
+				</div>
+				<div class="datas">
+					<ul id="msgs">
+					</ul>
+				</div>
+			</div>
+			
+			<div class="data_list">
+				<div class="data_list_title">
+					<img th:src="@{/images/link_logo.png}" style="width：18px;height:17PX;"/>
+					 以下情况可以联系博主<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=457122396&amp;site=qq&amp;menu=yes" target="_blank"><img src="./images/02_22.png"/></a>
+				</div>
+				<div class="datas">
+					<ul>
+						<li><span>1.提供bug、建议的。</span></li>
+						<li><span>2.单身的漂亮妹子想找靠谱对象的。</span></li>
+						<li><span>3.要友情链接的。</span></li>
+						<li><span>4.要给我发红包的</span></li>
+					</ul>
+				</div>
+			</div>
+		  </div>
+      </div>

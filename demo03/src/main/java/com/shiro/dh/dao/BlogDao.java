@@ -9,10 +9,9 @@
   
 package com.shiro.dh.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.shiro.dh.entity.Blog;
-import com.shiro.dh.entity.UserInfo;
 
 /**  
  * ClassName:BlogDao <br/>  
@@ -23,7 +22,7 @@ import com.shiro.dh.entity.UserInfo;
  * @since    JDK 1.7  
  * @see        
  */
-public interface BlogDao extends PagingAndSortingRepository<Blog,Long>{
+public interface BlogDao extends JpaRepository<Blog,Long>{
 
 }
   

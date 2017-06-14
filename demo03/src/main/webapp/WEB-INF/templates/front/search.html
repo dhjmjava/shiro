@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+   <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/blog.css}"/>
+	<script th:src="@{/bootstrap3/js/jquery-1.11.2.min.js}"></script>
+	<script th:src="@{/bootstrap3/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=PWFIsebjw4C3zw3xl9MMnQ0Z0wbvPPDf"></script>
+	<title>搜索结果</title>
+	<link rel="icon" th:href="@{./images/apple-touch-icon.png}" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+	<!-- 头部  -->
+	<div id="header" th:include="common/header :: copy"></div>
+	
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div class="data_list">
+	  		<div class="data_list_title">
+			<img th:src="@{/images/list_icon.png}"/>
+			&nbsp;‘<span th:text="${q}"></span>’&nbsp;共搜索到&nbsp;<font color='red' th:text="${page.totalCount}"></font>&nbsp;个结果</div>
+	  		<div class="datas">
+	  			<ul th:each="blog:${page?.page}">
+	  				<li style="margin-bottom: 30px">
+					  	<span class="title"><a th:href="@{/article-{bi}.html(bi=${blog.id})}" th:text="${blog.title}">标题</a></span>
+					  	<span class="summary"><a th:href="@{/article-{bi}.html(bi=${blog.id})}" th:utext="${blog.content}">正文</a>内容</span>
+	  				</li>
+	  				 <hr style="height:5px;border:none;border-top:1px dashed gray;padding-bottom:  10px;margin-top: 45px;margin-bottom: 10px;" />
+	  			</ul>
+	  		</div>
+	  	</div>
+	  	
+	 <div>
+		<nav>
+		  <ul class="pagination pagination-sm">
+		    <li><a href="/blog">首页</a></li>
+		    <li id="pageUp"><a href="javascript:;"  onclick="pageUp();">上一页</a></li>
+		    <li th:each="num,numStat:${page?.pageNumber}"><a href="javascript:;" class="jump" th:id="num+${num}" th:text="${num}">1</a></li>
+		    <li id="pageDown"><a href="javascript:;" id="pageDown" onclick="pageDown();">下一页</a></li>
+		    <li><a href='javascript:;' onclick="pageEnd()">尾页</a></li>
+		  </ul>
+		    <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div>
+		</nav>
+	 </div>
+	  	
+	  </div>
+	  <!-- 
+       右边 
+	   <div id="right" th:include="common/right :: righter"></div> -->
+		  
+		</div>
+		
+		<!-- 底部 -->
+		<div id="foot" th:include="common/footer :: foot"></div>
+		
+	</div>
+	<form action="/blog/search" accept-charset="UTF-8" method="GET"  id="homeForm">
+		<input type="hidden" name="currPage" id="currPage" th:value="${page.currPage}" />
+		<input type="hidden" name="pageSize" id="pageSize" th:value="${page.pageSize}" />
+    </form>
+	
+	
+	<script type="text/javascript" th:inline="javascript">
+	    var currPage=[[${page.currPage}]];
+		var totalCount=[[${page.totalCount}]];
+	</script> 
+	<script th:src="@{/javascript/home.js}"></script>
+  </body>
+</html>

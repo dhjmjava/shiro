@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>博客管理</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/supervisor/supervisor.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}"/>
+	<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/javascript/supervisor/admin.js}"></script>
+</head>
+<body>
+	<div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+		<div title="所有博客" style="padding:5px">
+			<table id="blogs" class="easyui-datagrid" toolbar="#tool"
+					data-options="url:'/supervisor/findAllBlogs',pagination:true,singleSelect:true,fit:true,fitColumns:true">
+				<thead>
+					<tr>
+						<th data-options="field:'itemid',formatter:formatXH,align:'center'" width="30">序号</th>
+						<th data-options="field:'title',align:'center'" width="150">博客标题</th>
+						<th data-options="field:'blogType',align:'center'" width="100">所属类别</th>
+						<th data-options="field:'publishTimeText',align:'center'" width="80">发布时间</th>
+						<th data-options="field:'readCount',align:'center'" width="80">阅读量</th>
+						<th data-options="field:'isUse',formatter:formatStatus,align:'center'" width="70">状态</th>
+						<th data-options="field:'status',formatter:formatCZ,align:'center'" width="80">操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+    <!-- 工具栏  -->
+   <div id="tool" style="padding:3px">
+	<span>标题:</span>
+	<input id="title" style="line-height:26px;border:1px solid #ccc;border-radius: 5px;"/>
+	<span>类别:</span>
+	<input id="blogType" class="easyui-combobox" style="line-height:26px;border:1px solid #ccc;border-radius: 5px;"
+	      data-options="url:'/supervisor/findAllTypes',panelHeight:'auto',required:true,editable:false,valueField:'id',textField:'name',width:140" /> 
+	<a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()"><button style="border-radius: 3px;width:60px">搜索</button></a>
+   </div>	
+   		
+ <script type="text/javascript">
+	function formatXH(value,row,index){
+		return index+1;
+	}
+	function formatCZ(value,row,index){
+		return '<span onclick="update('+row.id+')"><a href="#">修改</a></span>&nbsp;&nbsp;<span onclick="deleteBlog('+row.id+')"><a href="#">删除</a></span>';
+	}
+	function formatStatus(value,row,index){
+		return value?'<font color="green">显示</font>':'<font color="red">隐藏</font>';
+	}
+	function update(id){
+		window.location.href="/supervisor/update_blog.html?id="+id;
+	}
+	
+	
+	function deleteBlog(id){
+		$.messager.confirm('提示', '确认删除?', function(r){
+			if (r){
+				$.ajax({
+					url : "/supervisor/deleteBlog",
+					type : "POST",
+					data : {"id" : id,},
+					success : function(data) {
+						if(data.code!=-1){
+							$.messager.alert('提示',"删除成功！");
+							$("#blogs").datagrid("reload");
+						}
+					},
+					error : function(data) {
+						alert("you are holder a problem！");
+					}
+				});
+			}
+		});
+	} 
+</script>
+</body>
+</html>
