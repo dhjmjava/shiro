@@ -12,6 +12,9 @@ package com.shiro.dh.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**  
  * ClassName:MessageBoard <br/>  
  * Function: 留言板. <br/>  
@@ -21,6 +24,8 @@ import java.util.Date;
  * @since    JDK 1.7  
  * @see        
  */
+@Entity
+@Table(name="t_message_board")
 public class MessageBoard implements Serializable{
 	
 	/**  

@@ -9,7 +9,7 @@
   
 package com.shiro.dh.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.MessageBoard;
@@ -24,7 +24,7 @@ import com.shiro.dh.entity.MessageBoard;
  * @see        
  */
 @Repository
-public interface MessageBoardDao extends PagingAndSortingRepository<MessageBoard, Long>{
+public interface MessageBoardDao extends JpaRepository<MessageBoard, Long>{
 
 }
   

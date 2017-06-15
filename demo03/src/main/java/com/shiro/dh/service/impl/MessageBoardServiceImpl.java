@@ -36,7 +36,7 @@ public class MessageBoardServiceImpl extends BaseService<MessageBoard> implement
 	@Override
 	public List<MessageBoard> queryAll() {
 		
-		return iterableToList(messageBoardDao.findAll());
+		return messageBoardDao.findAll();
 		
 	}
 
