@@ -18,7 +18,6 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +44,16 @@ public class IndexController extends BaseController{
     	return "html/login";
     }
 	
+	/**
+	 * 
+	 * login:进行登录验证. <br/>   
+	 *   
+	 * @param username
+	 * @param password
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月15日下午8:17:01
+	 */
 	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
 	@ResponseBody
     public String login(@RequestParam("username") String username,@RequestParam("password") String password) {  
@@ -52,8 +61,8 @@ public class IndexController extends BaseController{
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         token.setRememberMe(true);
-        //未验证则进行登录
         String msg = "";
+        //未验证则进行登录
         if(!subject.isAuthenticated()){
         	try {
         		
@@ -75,6 +84,15 @@ public class IndexController extends BaseController{
         return msg;  
     }  
 	
+	/**
+	 * 
+	 * loginOut:退出系统，交给shiro管理. <br/>   
+	 *   
+	 * @param request
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月15日下午8:15:51
+	 */
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpServletRequest request){
 		Subject subject = SecurityUtils.getSubject();

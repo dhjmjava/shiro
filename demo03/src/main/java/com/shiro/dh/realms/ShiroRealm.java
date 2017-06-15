@@ -18,9 +18,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
@@ -56,7 +54,7 @@ public class ShiroRealm extends AuthorizingRealm{
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
         		userInfo.getUsername(), // 用户名  
         		userInfo.getPassword(), // 密码  
-                ByteSource.Util.bytes(userInfo.getCredentialsSalt()), // salt=username+salt  
+                ByteSource.Util.bytes(userInfo.getCredentialsSalt()), // salt=username 
                 getName() // realm name  
         );  
         return authenticationInfo;  
@@ -85,14 +83,4 @@ public class ShiroRealm extends AuthorizingRealm{
         return authorizationInfo; 
     }  
     
-    public static void main(String[] args) {
-		String algorithmName="MD5";//加密算法名称
-		Object source="123456";//需要加密的内容
-		Object salt="admin"; //加密盐值
-		int hashIterations=9;//加密次数
-		Object result = new  SimpleHash(algorithmName, source, salt, hashIterations);
-		System.out.println(result.toString());
-	}
-
-
 }
