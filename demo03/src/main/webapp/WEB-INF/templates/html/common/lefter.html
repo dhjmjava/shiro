@@ -1,19 +1,19 @@
 <!-- 公用导航页 -->
 <div id="lefter" th:fragment="left" data-options="region:'west',split:true" title="首页"  style="width:160px;">
 	<div  class="easyui-accordion" data-options="fit:true,border:false">
-		<div title="博客管理" data-options="selected:true " style="padding:10px;">
+		<div shiro:hasPermission="blog:mgt" title="博客管理" data-options="selected:true " style="padding:10px;">
 			<div class="auth_list" onclick="changePanel('/supervisor/add_blog.html');">添加博客</div>
 			<div class="auth_list" onclick="changePanel('/supervisor/blogMgt.html');">博客管理</div>
 			<div class="auth_list" onclick="changePanel('/supervisor/typeMgt.html');">类别管理</div>
 		</div>
-		<div title="评论管理" style="padding:10px;">
+		<div shiro:hasPermission="comment:mgt"   title="评论管理" style="padding:10px;">
 			<div class="auth_list" onclick="changePanel('/supervisor/commentMgt.html');">评论管理</div>
 			<div class="auth_list" onclick="changePanel('/supervisor/messageMgt.html');">留言管理</div>
 		</div>
-		<div title="链接管理" style="padding:10px">
+		<div shiro:hasPermission="link:mgt"  title="链接管理" style="padding:10px">
 			<div class="auth_list" onclick="changePanel('/supervisor/link.html');">链接管理</div>
 		</div>
-		<div title="系统管理" style="padding:10px">
+		<div shiro:hasPermission="system:mgt"  title="系统管理" style="padding:10px">
 			<div class="auth_list" onclick="changePanel('/supervisor/updateInfo.html');">修改信息</div>
 			<div class="auth_list" onclick="changePanel('/supervisor/modifierPwd.html');">修改密码</div>
 			<div class="auth_list" onclick="changePanel('/supervisor/modifierPwd.html');">用户管理</div>

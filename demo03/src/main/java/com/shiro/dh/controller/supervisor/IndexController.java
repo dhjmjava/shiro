@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiro.dh.controller.BaseController;
 
@@ -44,8 +45,9 @@ public class IndexController extends BaseController{
     	return "html/login";
     }
 	
-	@RequestMapping(value = "/dologin", method = RequestMethod.POST)  
-    public String login(@RequestParam("username") String username,@RequestParam("password") String password,Model model) {  
+	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
+	@ResponseBody
+    public String login(@RequestParam("username") String username,@RequestParam("password") String password) {  
         
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
@@ -69,16 +71,15 @@ public class IndexController extends BaseController{
 			}
         	
         }
-        
-        model.addAttribute("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理.  
-        return "redirect:/admin.html";  
+        return msg;  
     }  
 	
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpServletRequest request){
-		session.removeAttribute("userName");
-		return "supervisor/login";
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		return "html/login";
 	}
 	
 }
