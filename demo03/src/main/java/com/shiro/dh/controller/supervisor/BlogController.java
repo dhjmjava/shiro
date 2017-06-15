@@ -16,6 +16,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,11 +44,13 @@ public class BlogController extends BaseController{
 	
 
 	@RequestMapping("findAllBlogs")
+	@RequiresPermissions("blog:query")
 	public List<Blog> findAllBlogs(){
        return 	blogServiceImpl.findAll();	
 	}
 	
 	@RequestMapping("findAllTypes")
+	@RequiresPermissions("blogType:query")
 	public List<BlogTypes> findAllTypes(){
        return 	blogTypesServiceImpl.getAllBlogTypes();	
 	}
@@ -61,6 +64,7 @@ public class BlogController extends BaseController{
 	 * @since JDK 1.7
 	 */
 	@RequestMapping("submit_blog")
+	@RequiresPermissions("blogType:add")
 	public ErrorInfo submitBlog(Blog blog) throws Exception{
 		ErrorInfo error  = new ErrorInfo();
 		blog.setPublishTime(Calendar.getInstance().getTime());
@@ -74,6 +78,7 @@ public class BlogController extends BaseController{
 	
 	//修改blog
 	@RequestMapping("update_blog")
+	@RequiresPermissions("blogType:update")
 	public ErrorInfo submitUpdate(Blog blog){
 		ErrorInfo error  = new ErrorInfo();
 		blogServiceImpl.saveOrUpdateBlog(blog);

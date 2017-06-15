@@ -39,6 +39,14 @@ import com.shiro.dh.controller.BaseController;
 public class IndexController extends BaseController{
 	Logger logger = Logger.getLogger(IndexController.class);
 	
+	/**
+	 * 
+	 * login:登录页面. <br/>   
+	 *  
+	 * @author daihui  
+	 * @return  
+	 * @since JDK 1.7
+	 */
 	@RequestMapping("/login.html")
 	public String login(){
     	return "html/login";

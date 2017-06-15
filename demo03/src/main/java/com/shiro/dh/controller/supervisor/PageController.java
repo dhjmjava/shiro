@@ -31,7 +31,7 @@ import com.shiro.dh.util.Convert;
 public class PageController extends BaseController{
 	
 	@RequestMapping("admin.html")
-	@RequiresPermissions("spervisor:admin")//shiro权限注解;
+	@RequiresPermissions("supervisor:admin")//shiro权限注解;
 	public String admin(){
 		return "html/admin";
 	}

@@ -5,7 +5,6 @@ adminLogin={
        this.form.submit(this.handleSubmit);  
    },
    handleSubmit:function(){
-	   debugger;
 	   var datas={};
 	   adminLogin.form.find("input").each(function (i){  
           if (!($(this).attr("type") == "button" || $(this).attr("type") == "submit" || $(this).attr("type") == "reset" ))  
@@ -33,9 +32,8 @@ adminLogin={
        });  
    },  
    showResult: function (data){  
-	   if(data.code==-1){
-			$("#pwd_id").html(data.msg);
-			$.messager.alert('error',data);
+	   if(data!=""&&data!=null){
+			$("#pwd_id").html(data);
 		}else{
 			window.location.href="/supervisor/admin.html";
 		}
