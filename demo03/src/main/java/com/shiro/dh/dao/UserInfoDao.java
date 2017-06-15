@@ -3,7 +3,6 @@ package com.shiro.dh.dao;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.shiro.dh.dao.custom.UserInfoCustom;
 import com.shiro.dh.entity.UserInfo;
 
 /**  
@@ -16,7 +15,7 @@ import com.shiro.dh.entity.UserInfo;
  */
 
 @Repository
-public interface UserInfoDao extends PagingAndSortingRepository<UserInfo,Long> ,UserInfoCustom{
+public interface UserInfoDao extends PagingAndSortingRepository<UserInfo,Long> {
 	
 	UserInfo findByUsername(String username);
 	

@@ -39,16 +39,25 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);  
         // 拦截器  
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();  
-        filterChainDefinitionMap.put("/dologin", "anon");  //登录验证的url，可以匿名访问
+        filterChainDefinitionMap.put("/supervisor/dologin", "anon");  //登录验证的url，可以匿名访问
         // 配置退出过滤器,其中的具体代码Shiro已经替我们实现了  
-        filterChainDefinitionMap.put("/logout", "logout");  
+        filterChainDefinitionMap.put("/supervisor/logout", "logout"); 
+        //配置静态文件可以匿名访问
+        filterChainDefinitionMap.put("/bootstrap3/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/datimeday/**", "anon");
+        filterChainDefinitionMap.put("/easyui/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
+        filterChainDefinitionMap.put("/javascript/**", "anon");
+        filterChainDefinitionMap.put("/utf8-jsp/**", "anon");
+        
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 --> 
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->  
         filterChainDefinitionMap.put("/**", "authc");  
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面  
-        shiroFilterFactoryBean.setLoginUrl("/login");  
+        shiroFilterFactoryBean.setLoginUrl("/supervisor/login.html");  
         // 登录成功后要跳转的链接  
-        shiroFilterFactoryBean.setSuccessUrl("/index");  
+        shiroFilterFactoryBean.setSuccessUrl("/supervisor/admin.html");  
         // 未授权界面;  
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");  
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);  
@@ -107,7 +116,7 @@ public class ShiroConfiguration {
     public EhCacheManager ehCacheManager(){
        System.out.println("ShiroConfiguration.getEhCacheManager()");
        EhCacheManager cacheManager = new EhCacheManager();
-       cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+       cacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
        return cacheManager;
     }
       

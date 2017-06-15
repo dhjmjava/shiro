@@ -68,6 +68,12 @@ public class PageController extends BaseController{
 		return "html/supervisor/updateInfo";
 	}
 	
+	//评论管理
+	@RequestMapping("commentMgt.html")
+	public String commentMgt(Model model){
+		return "supervisor/commentMgt/commentMgt";
+	}
+	
 	@RequestMapping("messageMgt.html")
 	public String messageMgt(){
 		return "html/supervisor/msgMgt";

@@ -9,20 +9,21 @@
   
 package com.shiro.dh.controller.supervisor;  
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shiro.dh.controller.BaseController;
-import com.shiro.dh.entity.Blog;
-import com.shiro.dh.entity.Blogger;
-import com.shiro.dh.util.ErrorInfo;
 
 /**  
  * ClassName:AdminController <br/>  
@@ -34,21 +35,45 @@ import com.shiro.dh.util.ErrorInfo;
  * @see        
  */
 @Controller
-@RequestMapping("/supervisor")
+@RequestMapping("supervisor")
 public class IndexController extends BaseController{
 	Logger logger = Logger.getLogger(IndexController.class);
 	
-	//评论管理
-	@RequestMapping("/commentMgt.html")
-	public String commentMgt(Model model){
-		return "supervisor/commentMgt/commentMgt";
-	}
-	
-
 	@RequestMapping("/login.html")
 	public String login(){
-    	return "supervisor/login";
+    	return "html/login";
     }
+	
+	@RequestMapping(value = "/dologin", method = RequestMethod.POST)  
+    public String login(@RequestParam("username") String username,@RequestParam("password") String password,Model model) {  
+        
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        token.setRememberMe(true);
+        //未验证则进行登录
+        String msg = "";
+        if(!subject.isAuthenticated()){
+        	try {
+        		
+        		subject.login(token);
+				
+			} catch (UnknownAccountException e) {
+				System.out.println("UnknownAccountException -->帐号不存在：");  
+                msg = "UnknownAccountException -->帐号不存在：";  
+			} catch (IncorrectCredentialsException e){
+				System.out.println("IncorrectCredentialsException -- > 密码不正确：");  
+                msg = "IncorrectCredentialsException -- > 密码不正确：";
+			} catch (Exception e){
+				e.printStackTrace();
+				msg = "登录失败！！";
+			}
+        	
+        }
+        
+        model.addAttribute("msg", msg);
+        // 此方法不处理登录成功,由shiro进行处理.  
+        return "redirect:/admin.html";  
+    }  
 	
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpServletRequest request){

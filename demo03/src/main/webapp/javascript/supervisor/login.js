@@ -27,8 +27,7 @@ adminLogin={
 	   return true;
    },
    ajaxSubmit: function (datas){  
-	   console.log(datas);
-       var url = "/supervisor/checkLogin";  
+       var url = "/supervisor/dologin";  
        $.post(url,datas,function(data){
     	   adminLogin.showResult(data);  
        });  
