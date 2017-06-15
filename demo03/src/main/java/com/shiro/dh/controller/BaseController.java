@@ -8,10 +8,47 @@
  */
 package com.shiro.dh.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.shiro.dh.service.BlogCommentsService;
+import com.shiro.dh.service.BlogService;
+import com.shiro.dh.service.BlogTypesService;
+import com.shiro.dh.service.BloggerService;
+import com.shiro.dh.service.LinkService;
+import com.shiro.dh.service.MessageBoardService;
+
 /**
  * @author Administrator
  *
  */
 public class BaseController {
+	
+	@Autowired
+	protected HttpSession session;
+	
+	@Autowired
+	protected BloggerService bloggerServiceImpl;
+	
+	@Autowired
+	protected BlogTypesService blogTypesServiceImpl;
+	
+	@Autowired
+	protected BlogService blogServiceImpl;
+	
+	@Autowired
+	protected LinkService linkServiceImpl;
+	
+	@Autowired
+	protected BlogCommentsService blogCommentsServiceImpl;
+	
+	/*@Autowired
+	protected RedisUtil redisUtil;*/
+	//@Autowired
+	//protected RedisService redisServiceImpl;
+	
+	@Autowired
+	protected MessageBoardService messageBoardServiceImpl;
 
 }

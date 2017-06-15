@@ -9,7 +9,7 @@
   
 package com.shiro.dh.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.Link;
@@ -24,7 +24,7 @@ import com.shiro.dh.entity.Link;
  * @see        
  */
 @Repository
-public interface LinkDao extends PagingAndSortingRepository<Link, Long>{
+public interface LinkDao extends JpaRepository<Link, Long>{
 
 }
   

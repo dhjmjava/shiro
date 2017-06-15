@@ -9,7 +9,7 @@
   
 package com.shiro.dh.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.Blogger;
@@ -24,7 +24,7 @@ import com.shiro.dh.entity.Blogger;
  * @see        
  */
 @Repository
-public interface BloggerDao extends PagingAndSortingRepository<Blogger, Long>{
+public interface BloggerDao extends JpaRepository<Blogger, Long>{
 
 }
   

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/blog.css}"/>
+	<script th:src="@{/bootstrap3/js/jquery-1.11.2.min.js}"></script>
+	<script th:src="@{/bootstrap3/js/bootstrap.min.js}"></script>
+	<script th:src="@{/javascript/common.js}"></script>
+	<script th:src="@{/javascript/home.js}"></script>
+	<title>留言板</title>
+	<link rel="icon" th:href="@{./images/apple-touch-icon.png}" type="image/x-icon" />
+	<style type="text/css">
+	  .summary font{font-size:18px;}
+	</style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部  -->
+	<div id="header" th:include="common/header :: copy"></div>
+	
+	<div class="row">
+	  <div class="col-md-9">
+	  	<div class="data_list">
+	  		<div class="data_list_title">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;留言板</span></div>
+	  		<div class="col-sm-12" style="margin-bottom: 15px;border:1px solid blue;background: gray;">
+	  		   <img style="width:100%;margin: 5px 5px" alt="" th:src="@{./images/tougao.jpg}"/>
+	  		</div>
+	  		<div class="datas">
+			    <form id="msgForm" role="form"  class="form-horizontal" action="/saveMsg" method="POST">
+				  <div class="form-group">
+				    <label for="msgContent"  class="col-sm-2 control-label">留言内容:</label>
+				   <div class="col-sm-10">
+				   	 <textarea style="height:250px;resize:none" name="msgContent"  id="msgContent" class="form-control"></textarea>
+				     <p class="help-block" style="color:red">* 请勿提交敏感词汇，以及攻击本站的代码！！谢谢</p>
+				  </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="userName"  class="col-sm-2 control-label">请留下您的大名:</label>
+				    <div class="col-sm-10">
+				    	<input type="text" name="userName" class="form-control" id="userName" placeholder="请输入名称..."/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="email"  class="col-sm-2 control-label">邮箱:</label>
+				    <div class="col-sm-10">
+				   	 <input type="text" name="email" class="form-control" id="email" placeholder="请输入邮箱..."/>
+				    </div>
+				  </div> 
+				  
+				  <div style="text-align: center;padding:10px">
+				  	<button id="submitBtn" type="button" class="btn btn-default" style="margin-right:15px">提交</button>
+				  	<button type="reset" class="btn btn-default">重置</button>
+				  </div>
+				</form>
+	  		</div>
+	  	    <hr style="border:1px solid red"/>
+	  	    <div class="datas">
+	  	    最近留言
+	  	       <div class="comment" th:each="msg,msgStat:${msgs}">
+				<div style="border-radius:5px;font-size:18px;margin-bottom: 15px;border:1px solid blue;background: #d9edf7;">
+					<font th:text="${(msgStat.index+1)+'、'}"></font>&nbsp;
+					<span th:text="${msg.msgContent}"></span>
+					<div style="text-align: right">
+					 <span th:text="${msg.ip}"></span> &nbsp;
+					 <span style="text-align: right" th:text="${'发表于:'+#calendars.format(msg.publishTime,'yyyy-MM-dd HH:mm:ss')}"></span> &nbsp;
+					</div>
+				</div>
+			  </div>
+	  	    
+	  	    </div>
+	  	</div>
+	  </div>
+	  
+	    <!-- 右边  -->
+		<div id="right" th:include="common/right :: righter"></div>
+		
+		</div>
+		
+		<!-- 底部 -->
+		<div id="foot" th:include="common/footer :: foot"></div>
+	</div>
+  <script>
+    $(function(){
+    	$("#submitBtn").click(function(){
+    		var url=$("#msgForm").attr("action");
+    		var datas=$("#msgForm").serializeObject();
+    		if(isBlank(datas.msgContent)){
+    			alert("请输入留言内容！");
+    			return false;
+    		}
+    		$.post(url,datas,function(result){
+    			if(result=="success"){
+    				alert("提交成功！留言将会在审核后显示！");
+    				window.location.reload();
+    			}
+    		})
+    	})
+    })
+  </script>
+  </body>
+</html>

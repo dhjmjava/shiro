@@ -33,7 +33,6 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	@Override
 	public Page<Blog> getBlogList(int offset, int limit) {
 		  
-		// TODO Auto-generated method stub  
 		return null;
 		
 	}
@@ -41,7 +40,6 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	@Override
 	public Page<Blog> getBlogPage(int currPage, int pageSize, long typeId, String searchDate) {
 		  
-		// TODO Auto-generated method stub  
 		return null;
 		
 	}
@@ -49,7 +47,6 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	@Override
 	public List<Blog> getBlogDate() {
 		  
-		// TODO Auto-generated method stub  
 		return null;
 		
 	}
@@ -57,31 +54,35 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	@Override
 	public List<Blog> getBlogType() {
 		  
-		// TODO Auto-generated method stub  
 		return null;
 		
 	}
 
 	@Override
 	public void deleteBlog(long id) {
-		  
-		// TODO Auto-generated method stub  
+		
+		blogDao.delete(id);
 		
 	}
 
 	@Override
 	public Blog saveOrUpdateBlog(Blog blog) {
 		  
-		// TODO Auto-generated method stub  
-		return null;
+		return blogDao.save(blog);
 		
 	}
 
 	@Override
 	public Blog getBlogById(long id) {
 		  
-		// TODO Auto-generated method stub  
-		return null;
+		return blogDao.findOne(id);
+		
+	}
+
+	@Override
+	public List<Blog> findAll() {
+		  
+		return blogDao.findAll();
 		
 	}
 

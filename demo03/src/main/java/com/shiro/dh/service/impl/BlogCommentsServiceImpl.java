@@ -36,7 +36,7 @@ import com.shiro.dh.util.IpUtil;
  * @see        
  */
 @Service
-public class BlogCommentsServiceImpl extends BaseService<BlogComments> implements BlogCommentsService{
+public class BlogCommentsServiceImpl extends BaseService implements BlogCommentsService{
     Logger logger = Logger.getLogger(BloggerServiceImpl.class);
 	
 	@Override

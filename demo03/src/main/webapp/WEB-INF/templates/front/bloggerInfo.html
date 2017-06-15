@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/blog.css}"/>
+	<script th:src="@{/bootstrap3/js/jquery-1.11.2.min.js}"></script>
+	<script th:src="@{/bootstrap3/js/bootstrap.min.js}"></script>
+	<title>关于博主</title>
+	<link rel="icon" th:href="@{./images/apple-touch-icon.png}" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+	<!-- 头部  -->
+	<div id="header" th:include="common/header :: copy"></div>
+	
+	<div class="row">
+	  <div class="col-md-9">
+	  	<div class="data_list">
+	  		<div class="data_list_title">
+			<img th:src="@{/images/list_icon.png}"/>
+			关于博主</div>
+	  		
+	  		<div class="datas">
+			    <span class="summary" th:utext="${blogger.describe}">摘要</span>
+	  		</div>
+	  	</div>
+	  </div>
+	    <!-- 右边  -->
+		<div id="right" th:include="common/right :: righter"></div>
+	  
+		</div>
+		
+    <!-- 底部 -->
+		<div id="foot" th:include="common/footer :: foot"></div>
+		
+	</div>
+	
+	<form action="/blog" accept-charset="UTF-8" method="GET"  id="homeForm">
+		<input type="hidden" name="typeId" id="typeId" th:value="${typeId}"/>
+		<input type="hidden" name="searchDate" id="searchDate" th:value="${searchDate}"/>
+		<input type="hidden" name="currPage" id="currPage" th:value="${currPage}" />
+    </form>
+    
+	<script type="text/javascript" th:inline="javascript">
+	    var currPage=[[${currPage}]];
+	</script> 
+	<script th:src="@{/javascript/home.js}"></script>
+	<script th:src="@{/javascript/blogInfo.js}"></script>
+	
+	<script>
+	 $(function(){
+		 $(".summary").each(function(){
+				var maxwidth=500;
+				    if($(this).text().length>maxwidth){
+						$(this).text($(this).text().substring(0,maxwidth));
+						$(this).html($(this).html()+'…');
+				    }
+	    });
+	 })
+	</script>
+  </body>
+</html>

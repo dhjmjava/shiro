@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>友情链接管理</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/supervisor/supervisor.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}"/>
+	<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/javascript/supervisor/admin.js}"></script>
+</head>
+<body>
+	<div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+		<div title="所有链接" style="padding:5px">
+			<table id="links" class="easyui-datagrid" toolbar="#tool"
+					data-options="url:'/supervisor/findAllLink',pagination:true,singleSelect:true,fit:true,fitColumns:true">
+				<thead>
+					<tr>
+						<th data-options="field:'id',formatter:formatXH,align:'center'" width="30">序号</th>
+						<th data-options="field:'name',align:'center'" width="150">name</th>
+						<th data-options="field:'url',align:'center'" width="100">url</th>
+						<th data-options="field:'isUse',align:'center'" width="80">是否使用</th>
+						<th data-options="field:'cz',formatter:formatCZ,align:'center'" width="80">操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	
+<div id="tool" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#" onclick="newLink(true,0);" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+	</div>
+</div>
+
+<div id="addLink" class="easyui-dialog" title="添加链接" style="width:500px;height:300px;"
+    data-options="iconCls:'icon-save',resizable:true,modal:true" closed="true" buttons="#dlg-buttons">
+    <form id="linkForm">
+    <input type="hidden" id="linkId" value="0"/>
+     <table id="linkTB" style="width:100%;border:1px solid red">
+	     <tr>
+		     <td style="text-align: right;width:10%"><label for="name">name:</label></td>
+		     <td><input class="easyui-validatebox datas" type="text" id="linkName" name="name"/></td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="url">url:</label></td>
+		     <td><input class="easyui-validatebox datas" type="text" name="url" id="url"/></td>
+	     </tr>
+	     <tr>
+		     <td style="text-align: right"><label for="isUse">显示:</label></td>
+		     <td>
+		      <select id="isUse" class="datas" type="text" name="isUse" required="true">
+		         <option value="true">启用</option>
+		         <option value="false">隐藏</option>
+		      </select>
+		     </td>
+	     </tr>
+	   </table>
+    </form>
+</div>
+<div id="dlg-buttons">
+	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveLink()">保存</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+ <script type="text/javascript">
+	function newLink(flag,id){
+		$("#addLink").dialog("open").dialog("setTitle","添加链接");
+		if(!flag){
+			$.post('/supervisor/findLinkById',{"id":id},function(data){
+				if(data!=null){
+					$("#linkName").val(data.name);
+					$("#url").val(data.url);
+					$("#linkId").val(id);
+				}
+			})
+		}else{
+		  $("#linkForm").form("clear");
+		}
+	}
+	function saveLink(){
+		var datas={};
+		if($("#linkId").val()==""){
+			datas.id=0;
+		}else{
+			datas.id=$("#linkId").val();
+		}
+		datas.name=$("#linkName").val()
+		datas.url=$("#url").val();
+		datas.isUse=$("#isUse").val();
+		$.post('/supervisor/saveOrUpdate',datas,function(data){
+			if(data.code!=-1){
+				window.location.reload();
+			}
+		});
+		
+	}
+	
+	function update(id){
+		
+	}
+	function formatXH(value,row,index){
+		return index+1;
+	}
+	function formatCZ(value,row,index){
+		return '<span onclick="newLink(false,'+row.id+')"><a href="#">修改</a></span>&nbsp;&nbsp;<span onclick="deleteLink('+row.id+')"><a href="#">删除</a></span>';
+	}
+	function formatStatus(value,row,index){
+		return value?'<font color="green">显示</font>':'<font color="red">隐藏</font>';
+	}
+	function update(id){
+		window.location.href="/supervisor/update_blog.html?id="+id;
+	}
+	
+	function deleteLink(id){
+		$.messager.confirm('提示', '确认删除?', function(r){
+			if (r){
+				$.ajax({
+					url : "/supervisor/deleteLink",
+					type : "POST",
+					data : {"id" : id,},
+					success : function(data) {
+						if(data.code!=-1){
+							$.messager.alert('提示',"删除成功！");
+							$("#links").datagrid("reload");
+						}
+					},
+					error : function(data) {
+						alert("you are holder a problem！");
+					}
+				});
+			}
+		});
+	} 
+</script>
+</body>
+</html>

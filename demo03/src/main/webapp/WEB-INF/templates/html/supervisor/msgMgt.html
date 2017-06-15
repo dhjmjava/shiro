@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>博客管理</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/supervisor/supervisor.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}"/>
+	<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/javascript/supervisor/admin.js}"></script>
+</head>
+<body>
+	<div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+		<div title="所有留言" style="padding:5px">
+			<table id="msgs" class="easyui-datagrid"
+					data-options="url:'/supervisor/findAllMsg',pagination:true,singleSelect:true,fit:true,fitColumns:true">
+				<thead>
+					<tr>
+						<th data-options="field:'itemid',formatter:formatXH,align:'center'" width="30">序号</th>
+						<th data-options="field:'msgContent',align:'center'" width="150">留言内容</th>
+						<th data-options="field:'userName',align:'center'" width="80">名称</th>
+						<th data-options="field:'publishTime',align:'center'" width="80">发表时间</th>
+						<th data-options="field:'email',align:'center'" width="80">邮箱</th>
+						<th data-options="field:'readCount',align:'center'" width="80">ip</th>
+						<th data-options="field:'status',formatter:formatStatus,align:'center'" width="80">状态</th>
+						<th data-options="field:'isUse',formatter:formatJG,align:'center'" width="80">是否通过</th>
+						<th data-options="field:'cz',formatter:formatCZ,align:'center'" width="80">操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+ <script type="text/javascript">
+	function formatXH(value,row,index){
+		return index+1;
+	}
+	function formatCZ(value,row,index){
+		if(row.status){
+			return '<span onclick="deleteMsg('+row.messageId+')"><a href="#">删除</a></span>';;
+		}
+		return '<span onclick="update('+row.messageId+')"><a href="#">通过</a></span>&nbsp;&nbsp;<span onclick="deleteMsg('+row.messageId+')"><a href="#">删除</a></span>';
+	}
+	function formatStatus(value,row,index){
+		return value?'<font color="green">已审核</font>':'<font color="red">未审核</font>';
+	}
+	function formatJG(value,row,index){
+		return row.use?'<font color="green">已通过</font>':'<font color="red">未通过</font>';
+	}
+	
+	function update(id){
+		$.ajax({
+			url:'/supervisor/updateMsg',
+			type:'post',
+			dataType:'json',
+			data:{"id":id},
+			success:function(data){
+				$("#msgs").datagrid("reload");
+			}
+		})
+	}
+	
+	
+	function deleteMsg(id){
+		$.messager.confirm('提示', '确认删除?', function(r){
+			if (r){
+				$.ajax({
+					url : "/supervisor/deleteMsg",
+					type : "POST",
+					data : {"id" : id,},
+					success : function(data) {
+						if(data.code!=-1){
+							$.messager.alert('提示',"删除成功！");
+							$("#msgs").datagrid("reload");
+						}
+					},
+					error : function(data) {
+						alert("you are holder a problem！");
+					}
+				});
+			}
+		});
+	} 
+</script>
+</body>
+</html>

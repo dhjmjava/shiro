@@ -27,12 +27,12 @@ import com.shiro.dh.service.LinkService;
  * @see        
  */
 @Service
-public class LinkServiceImpl extends BaseService<Link> implements LinkService {
+public class LinkServiceImpl extends BaseService implements LinkService {
 
 	@Override
 	public List<Link> getLinkList() {
 		
-		return iterableToList(linkDao.findAll());
+		return linkDao.findAll();
 		
 	}
 

@@ -27,7 +27,7 @@ import com.shiro.dh.service.BloggerService;
  * @since JDK 1.7
  */
 @Service
-public class BloggerServiceImpl extends BaseService<Blogger> implements BloggerService {
+public class BloggerServiceImpl extends BaseService implements BloggerService {
 
 	@Override
 	public Blogger getBloggerInfoById(long id) {

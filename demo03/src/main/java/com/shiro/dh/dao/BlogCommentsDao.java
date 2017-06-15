@@ -11,7 +11,7 @@ package com.shiro.dh.dao;
 
 import java.util.List;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.BlogComments;
@@ -26,7 +26,7 @@ import com.shiro.dh.entity.BlogComments;
  * @see        
  */
 @Repository
-public interface BlogCommentsDao extends PagingAndSortingRepository<BlogComments, Long>{
+public interface BlogCommentsDao extends JpaRepository<BlogComments, Long>{
 	 /**
 	  * 
 	  * findByBlogId:通过博客id查找评论. <br/>   

@@ -44,6 +44,8 @@ public interface BlogService {
 	 * @return
 	 */
 	 Page<Blog> getBlogPage(int currPage,int pageSize,long typeId,String searchDate);
+	 
+	 List<Blog> findAll();
 	
 	/**
 	 * 根据发布日期分类

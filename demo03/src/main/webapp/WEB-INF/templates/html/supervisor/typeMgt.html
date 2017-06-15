@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>类别管理</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/supervisor/supervisor.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}"/>
+	<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+</head>
+<body>
+ <script type="text/javascript"  th:inline="javascript">
+ function submitOrUpdate(flag){
+	 debugger
+	 var url="";
+	 var data={};
+     data.newBlogType=$("#newBlogType").val();
+	 if(flag){
+		data.id=$("#blogType").val();
+		url="/supervisor/updateType" 
+	 }else{
+		url="/supervisor/addType" 
+	 }
+	 $.post(url,data,function(result){
+		 if(result.code!=-1){
+			 $.messager.alert("提示","操作成功");
+			 window.location.reload();
+		 }
+	 })
+ }
+ </script>
+	 <form id="blogFrom" method="post" action="/spervisor/submit_blog">
+	  <table id="blogTB" style="width:100%;border:1px solid red">
+	     <tr>
+		     <td colspan="2" style="text-align: center;">类别管理</td>
+	     </tr>
+	     <tr style="text-align: center;">
+		     <td><input id="blogType" class="easyui-combobox" style="height:30px;width:250px;border:1px solid #ccc;border-radius: 5px;"
+	     			 data-options="url:'/supervisor/findAllTypes',panelHeight:'auto',required:true,editable:false,valueField:'id',textField:'name',width:140" /> 
+		     	<input id="newBlogType" class="easyui-combobox" style="height:30px;width:250px;border:1px solid #ccc;border-radius: 5px;"/>
+	          </td>
+	     </tr>
+	     
+	     <tr style="border:1px solid blue;margin-top: 30px">
+		     <td colspan="2" style="text-align: center">
+		    	<input onclick="submitOrUpdate(true)" style="width:50px;heigh:30px" type="button" value="修改"/>
+		    	<input onclick="submitOrUpdate(false)" style="width:50px;heigh:30px" type="button" value="新增"/>
+		     </td>
+	     </tr>
+	  </table>
+	</form>
+</body>
+</html>
