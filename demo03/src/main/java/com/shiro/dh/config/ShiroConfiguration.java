@@ -13,6 +13,7 @@ import java.util.Map;
   
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;  
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;  
@@ -39,7 +40,7 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);  
         // 拦截器  
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>(); 
-        //登录验证的url，可以匿名访问
+        //后台登录验证的url，可以匿名访问
         filterChainDefinitionMap.put("/supervisor/dologin", "anon");
         //配置退出过滤器,  
         filterChainDefinitionMap.put("/supervisor/logout", "logout"); 
@@ -51,6 +52,17 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/javascript/**", "anon");
         filterChainDefinitionMap.put("/utf8-jsp/**", "anon");
+        //配置前台页面可以匿名访问
+        filterChainDefinitionMap.put("/", "anon");//首页
+        filterChainDefinitionMap.put("/article*", "anon");
+        filterChainDefinitionMap.put("/aboutMe.html", "anon");
+        filterChainDefinitionMap.put("/download.html", "anon");
+        filterChainDefinitionMap.put("/messageboard.html", "anon");
+        filterChainDefinitionMap.put("/submit-comment", "anon");
+        filterChainDefinitionMap.put("/search", "anon");
+        filterChainDefinitionMap.put("/common", "anon");
+        filterChainDefinitionMap.put("/saveMsg", "anon");
+        
         
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 --> 
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->  
