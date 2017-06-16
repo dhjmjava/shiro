@@ -25,14 +25,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiro.dh.controller.BaseController;
 
-/**  
- * ClassName:AdminController <br/>  
- * Function: 后台管理控制器. <br/>  
- * Date:     2016年9月14日 下午1:15:17 <br/>  
- * @author   Administrator  
- * @version    
- * @since    JDK 1.6  
- * @see        
+/**
+ * * ClassName: IndexController <br/>  
+ * Function: TODO ADD FUNCTION. <br/>  
+ * date: 2017年6月16日 上午8:54:45 <br/>  
+ *  
+ * @author daihui 
+ * @version   
+ * @since JDK 1.7
  */
 @Controller
 @RequestMapping("supervisor")

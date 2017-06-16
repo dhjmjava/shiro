@@ -26,8 +26,13 @@ import com.shiro.dh.realms.ShiroRealm;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 /**
- * @author Administrator
- *
+ * * ClassName: ShiroConfiguration <br/>  
+ * Function: shiro配置. <br/>  
+ * date: 2017年6月16日 上午8:56:39 <br/>  
+ *  
+ * @author daihui 
+ * @version   
+ * @since JDK 1.7
  */
 @Configuration
 public class ShiroConfiguration {
