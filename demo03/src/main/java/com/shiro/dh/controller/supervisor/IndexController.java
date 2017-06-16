@@ -75,7 +75,7 @@ public class IndexController extends BaseController{
         	try {
         		
         		subject.login(token);
-				
+        		
 			} catch (UnknownAccountException e) {
 				System.out.println("UnknownAccountException -->帐号不存在：");  
                 msg = "UnknownAccountException -->帐号不存在：";  
