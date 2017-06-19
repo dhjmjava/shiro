@@ -78,16 +78,17 @@ public class IndexController extends BaseController{
         		
 			} catch (UnknownAccountException e) {
 				System.out.println("UnknownAccountException -->帐号不存在：");  
-                msg = "UnknownAccountException -->帐号不存在：";  
+                msg = "帐号不存在！";  
 			} catch (IncorrectCredentialsException e){
 				System.out.println("IncorrectCredentialsException -- > 密码不正确：");  
-                msg = "IncorrectCredentialsException -- > 密码不正确：";
+                msg = "用户名或密码不正确！";
 			} catch (Exception e){
 				e.printStackTrace();
 				msg = "登录失败！！";
 			}
         	
         }
+        System.out.println(subject.getSession().getId());
         // 此方法不处理登录成功,由shiro进行处理.  
         return msg;  
     }  
