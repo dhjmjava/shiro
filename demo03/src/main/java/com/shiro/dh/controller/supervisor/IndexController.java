@@ -88,7 +88,7 @@ public class IndexController extends BaseController{
 			}
         	
         }
-        System.out.println(subject.getSession().getId());
+        System.out.println("sessionId:"+subject.getSession().getId());
         // 此方法不处理登录成功,由shiro进行处理.  
         return msg;  
     }  

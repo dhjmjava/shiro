@@ -34,7 +34,7 @@ public class MessageBoard implements Serializable{
 	
 	private static final long serialVersionUID = -8957261577189231998L;
 	
-	private int messageId;
+	private long messageId;
 	private String msgContent;//留言内容
 	private Date publishTime;//发表时间	
 	private String userName;//用户名称
@@ -47,12 +47,12 @@ public class MessageBoard implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="msg_id")
-	public int getMessageId() {
+	@Column(name="message_id")
+	public long getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(long messageId) {
 		this.messageId = messageId;
 	}
 
@@ -74,7 +74,7 @@ public class MessageBoard implements Serializable{
 		this.publishTime = publishTime;
 	}
 	
-	@Column(name="username")
+	@Column(name="user_name")
 	public String getUserName() {
 		return userName;
 	}
