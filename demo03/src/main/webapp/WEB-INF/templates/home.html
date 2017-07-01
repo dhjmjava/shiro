@@ -35,7 +35,7 @@
 	  		 </div>
 	  	</div>
 	  	
-	<!--  <div>
+	 <div>
 		<nav>
 		  <ul class="pagination pagination-sm">
 		    <li><a href="/">首页</a></li>
@@ -46,13 +46,11 @@
 		  </ul>
 		    <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div>
 		</nav>
-	 </div> -->
+	 </div>
 	  	
 	  </div>
-	  
        <!-- 右边  -->
 	   <div id="right" th:include="common/right :: righter"></div>
-		  
 		</div>
 		
 		<!-- 底部 -->
@@ -60,17 +58,17 @@
 		
 	</div>
 	
-	<!-- <form action="/" accept-charset="UTF-8" method="GET"  id="homeForm">
+	<form action="/" accept-charset="UTF-8" method="GET"  id="homeForm">
 		<input type="hidden" name="typeId" id="typeId" th:value="${typeId}"/>
 		<input type="hidden" name="searchDate" id="searchDate"/>
 		<input type="hidden" name="currPage" id="currPage"/>
 		<input type="hidden" name="pageSize" id="pageSize" value="10" />
     </form>
-	 -->
 	
-	<!-- <script type="text/javascript" th:inline="javascript">
-	/* 	var pageNumber = [[${page.pageNumber.size()}]]; */
-	</script>  -->
-	<!-- <script th:src="@{/javascript/home.js}"></script> -->
+	
+	<script th:inline="javascript">
+	   var pageNumber = [[${page.pageNumber.size()}]];
+	</script> 
+	<script th:src="@{/javascript/home.js}"></script>
   </body>
 </html>

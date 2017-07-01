@@ -10,7 +10,17 @@
 package com.shiro.dh.service.impl;  
 
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.shiro.dh.entity.Blog;
@@ -37,24 +47,43 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 		
 	}
 
+	/**
+	 * 
+	 * getBlogPage:前台分页查询 <br/>   
+	 *   
+	 * @param offset
+	 * @param limit
+	 * @param blogType
+	 * @param time
+	 * @return  
+	 * @author daihui
+	 * Date:2017年7月1日上午11:37:14
+	 */
 	@Override
-	public Page<Blog> getBlogPage(int currPage, int pageSize, long typeId, String searchDate) {
-		  
-		return null;
+	public Page<Blog> getBlogPage(int offset, int limit, long blogType, String time) {
+		List<Blog> list = blogDao.queryPagination(offset,limit,blogType,time);
+		Page<Blog> page = new Page<Blog>();
+		page.page = list;
+		page.currPage = offset;
+		page.pageSize = limit;
+		page.totalCount = list.size();
+		page.setPageNumber(page.totalCount);
+		
+		return page;
 		
 	}
 
 	@Override
-	public List<Blog> getBlogDate() {
+	public Map<String, String> getBlogDate() {
 		  
-		return null;
+		return blogDao.queryByDate();
 		
 	}
 
 	@Override
-	public List<Blog> getBlogType() {
+	public Map<String,String> getBlogType() {
 		  
-		return null;
+		return blogDao.queryByType();
 		
 	}
 
@@ -81,7 +110,7 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 
 	@Override
 	public List<Blog> findAll() {
-		  
+		
 		return blogDao.findAll();
 		
 	}

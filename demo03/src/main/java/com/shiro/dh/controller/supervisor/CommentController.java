@@ -78,7 +78,7 @@ public class CommentController extends BaseController {
 		MessageBoard msg = messageBoardServiceImpl.findMessageById(Convert.strToLong(id, -1));
 		if(msg!=null){
 			msg.setStatus(true);
-			msg.setUse(true);
+			msg.setIsUse(true);
 		}
 		return messageBoardServiceImpl.save(msg);
 	}

@@ -108,11 +108,11 @@ public class MessageBoard implements Serializable{
 	}
 
 	@Column(name="is_use")
-	public boolean isUse() {
+	public boolean getIsUse() {
 		return isUse;
 	}
 
-	public void setUse(boolean isUse) {
+	public void setIsUse(boolean isUse) {
 		this.isUse = isUse;
 	}
 	

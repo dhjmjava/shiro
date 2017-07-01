@@ -11,6 +11,7 @@ package com.shiro.dh.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.shiro.dh.entity.Blog;
 import com.shiro.dh.util.Page;
@@ -51,13 +52,13 @@ public interface BlogService {
 	 * 根据发布日期分类
 	 * @return
 	 */
-	 List<Blog> getBlogDate();
+	 Map<String, String> getBlogDate();
 	
 	/**
 	 * 根据博客类型分类
 	 * @return
 	 */
-	 List<Blog> getBlogType();
+	 Map<String,String> getBlogType();
 	
 	/**
 	 * 根据id删除博客

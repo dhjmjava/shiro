@@ -213,7 +213,7 @@ public class HomeController extends BaseController{
     	mb.setUserName(userName);
     	mb.setPublishTime(new Date());
     	mb.setStatus(false);
-    	mb.setUse(false);
+    	mb.setIsUse(false);
     	mb.setIp(IpUtil.getIRealIPAddr(request));
     	messageBoardServiceImpl.save(mb);
     	return "success";
@@ -237,15 +237,15 @@ public class HomeController extends BaseController{
     	String searchDate = request.getParameter("searchDate");
 		try{
 			List<Link> links = linkServiceImpl.getLinkList();
-			List<Blog> blogDate = blogServiceImpl.getBlogDate();
-			List<Blog> typeBlogs = blogServiceImpl.getBlogType();
+			Map<String,String> dateList = blogServiceImpl.getBlogDate();
+			Map<String,String> typeList = blogServiceImpl.getBlogType();
 			Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
 			List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("blogger", blogger);
 			map.put("links", links);
-			map.put("blogDate", blogDate);
-			map.put("typeBlogs", typeBlogs);
+			map.put("dateList", dateList);
+			map.put("typeList", typeList);
 			map.put("currPage", currPage);
 			map.put("typeId", typeId);
 			map.put("searchDate", searchDate);
