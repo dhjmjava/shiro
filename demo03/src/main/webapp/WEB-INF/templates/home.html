@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+   <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/blog.css}"/>
+	<script th:src="@{/bootstrap3/js/jquery-1.11.2.min.js}"></script>
+	<script th:src="@{/bootstrap3/js/bootstrap.min.js}"></script>
+	<title>天地孤影任我行</title>
+	<link rel="icon" th:href="@{./images/apple-touch-icon.png}" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+	<!-- 头部  -->
+	<div id="header" th:include="common/header :: copy"></div>
+	
+	<div class="row">
+	  <div class="col-md-9">
+	  	<div class="data_list">
+	  		<div class="data_list_title">
+			<img th:src="@{/images/list_icon.png}"/>
+			最新博客</div>
+	  		 <div class="datas">
+	  			<ul th:each="blog:${page?.page}">
+	  				<li style="margin-bottom: 30px;margin-top: 10px;">
+	  					<span class="date"><a href="javascript:;" th:text="${#calendars.format(blog.publishTime,'yyyy年MM月dd日')}">时间</a></span>
+					  	<span class="title"><a th:href="@{/article-{bi}.html(bi=${blog.id})}" th:text="${blog.title}">标题</a></span>
+					  	<span class="summary"><a th:href="@{/article-{bi}.html(bi=${blog.id})}" th:utext="${blog.content}">正文</a>内容</span>
+					  	<span class="info">发表于<span th:text="${#calendars.format(blog.publishTime,'yyyy年MM月dd日  HH:mm:ss')}"></span> 阅读(<span th:text="${blog?.readCount}"></span>)</span>
+	  				</li>
+	  				 <hr style="height:5px;border:none;border-top:1px dashed gray;padding-bottom:  10px;margin-top: 45px;margin-bottom: 10px;" />
+	  			</ul> 
+	  		 </div>
+	  	</div>
+	  	
+	 <div>
+		<nav>
+		  <ul class="pagination pagination-sm">
+		    <li><a href="/">首页</a></li>
+		    <li id="pageUp"><a href="javascript:;"  onclick="pageUp();">上一页</a></li>
+		    <li th:each="num,numStat:${page?.pageNumber}"><a href="javascript:;" class="jump" th:id="num+${num}" th:text="${num}">1</a></li>
+		    <li id="pageDown"><a href="javascript:;" id="pageDown" onclick="pageDown();">下一页</a></li>
+		    <li><a href='javascript:;' onclick="pageEnd()">尾页</a></li>
+		  </ul>
+		    <!-- <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div> -->
+		</nav>
+	 </div>
+	  	
+	  </div>
+	  
+       <!-- 右边  -->
+	   <div id="right" th:include="common/right :: righter"></div>
+		  
+		</div>
+		
+		<!-- 底部 -->
+		<div id="foot" th:include="common/footer :: foot"></div>
+		
+	</div>
+	
+	<form action="/" accept-charset="UTF-8" method="GET"  id="homeForm">
+		<input type="hidden" name="typeId" id="typeId" th:value="${typeId}"/>
+		<input type="hidden" name="searchDate" id="searchDate"/>
+		<input type="hidden" name="currPage" id="currPage"/>
+		<input type="hidden" name="pageSize" id="pageSize" value="10" />
+    </form>
+	
+	
+	<!-- <script type="text/javascript" th:inline="javascript">
+		var pageNumber = [[${page.pageNumber.size()}]];
+	</script> --> 
+	<script th:src="@{/javascript/home.js}"></script>
+  </body>
+</html>
