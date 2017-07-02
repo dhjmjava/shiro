@@ -58,20 +58,12 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/javascript/**", "anon");
         filterChainDefinitionMap.put("/utf8-jsp/**", "anon");
         //配置前台页面可以匿名访问
-        filterChainDefinitionMap.put("/", "anon");//首页
-        filterChainDefinitionMap.put("/article*", "anon");
-        filterChainDefinitionMap.put("/aboutMe.html", "anon");
-        filterChainDefinitionMap.put("/download.html", "anon");
-        filterChainDefinitionMap.put("/messageboard.html", "anon");
-        filterChainDefinitionMap.put("/submit-comment", "anon");
-        filterChainDefinitionMap.put("/search", "anon");
-        filterChainDefinitionMap.put("/common", "anon");
-        filterChainDefinitionMap.put("/saveMsg", "anon");
+        filterChainDefinitionMap.put("/**", "anon");//首页
         
         
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 --> 
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->  
-        filterChainDefinitionMap.put("/**", "authc");  
+        filterChainDefinitionMap.put("/supervisor/**", "authc");  
         // 设置登录url  
         shiroFilterFactoryBean.setLoginUrl("/supervisor/login.html");  
         // 登录成功后要跳转的链接

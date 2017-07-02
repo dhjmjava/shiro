@@ -64,7 +64,7 @@ public class BlogController extends BaseController{
 	 * @since JDK 1.7
 	 */
 	@RequestMapping("submit_blog")
-	@RequiresPermissions("blogType:add")
+	@RequiresPermissions("blog:add")
 	public ErrorInfo submitBlog(Blog blog) throws Exception{
 		ErrorInfo error  = new ErrorInfo();
 		blog.setPublishTime(Calendar.getInstance().getTime());
@@ -78,7 +78,7 @@ public class BlogController extends BaseController{
 	
 	//修改blog
 	@RequestMapping("update_blog")
-	@RequiresPermissions("blogType:update")
+	@RequiresPermissions("blog:update")
 	public ErrorInfo submitUpdate(Blog blog){
 		ErrorInfo error  = new ErrorInfo();
 		blogServiceImpl.saveOrUpdateBlog(blog);
@@ -94,6 +94,7 @@ public class BlogController extends BaseController{
 	 * @since JDK 1.7
 	 */
 	@RequestMapping("deleteBlog")
+	@RequiresPermissions("blog:del")
 	public ErrorInfo deleteBlog(HttpServletRequest request,String id){
 		ErrorInfo error = new ErrorInfo();
 		long bid = Convert.strToLong(id, -1);
@@ -103,6 +104,7 @@ public class BlogController extends BaseController{
 	
 	//修改类型信息
 	@RequestMapping("updateType")
+	@RequiresPermissions("blogType:update")
 	public ErrorInfo updateType(HttpServletRequest request,String id,String newBlogType){
 		ErrorInfo error = new ErrorInfo();
 		BlogTypes type = new BlogTypes();
@@ -116,6 +118,7 @@ public class BlogController extends BaseController{
 	
 	//增加blog类型
 	@RequestMapping("addType")
+	@RequiresPermissions("blogType:add")
 	public ErrorInfo addType(HttpServletRequest request,String newBlogType){
 		ErrorInfo error = new ErrorInfo();
 		BlogTypes type = new BlogTypes();

@@ -202,20 +202,9 @@ public class HomeController extends BaseController{
     
     @RequestMapping(value="/saveMsg",method=RequestMethod.POST)
     @ResponseBody
-    public String saveMsg(HttpServletRequest request){
-    	String userName=request.getParameter("userName");
-    	String email=request.getParameter("email");
-    	String msgContent=request.getParameter("msgContent");
-    	
-    	MessageBoard mb = new MessageBoard();
-    	mb.setMsgContent(msgContent);
-    	mb.setEmail(email);
-    	mb.setUserName(userName);
-    	mb.setPublishTime(new Date());
-    	mb.setStatus(false);
-    	mb.setUse(false);
-    	mb.setIp(IpUtil.getIRealIPAddr(request));
-    	messageBoardServiceImpl.save(mb);
+    public String saveMsg(HttpServletRequest request,MessageBoard msg){
+    	msg.setIp(IpUtil.getIRealIPAddr(request));
+    	messageBoardServiceImpl.save(msg);
     	return "success";
     	
     }
@@ -236,16 +225,17 @@ public class HomeController extends BaseController{
     	long typeId = Convert.strToLong(request.getParameter("typeId"), -1);
     	String searchDate = request.getParameter("searchDate");
 		try{
-			List<Link> links = linkServiceImpl.getLinkList();
-			List<Blog> blogDate = blogServiceImpl.getBlogDate();
-			List<Blog> typeBlogs = blogServiceImpl.getBlogType();
-			Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
+			List<Link> linkList = linkServiceImpl.getLinkList();
+			List<Map<String,Integer>> dateList = blogServiceImpl.getBlogDate();
+			Map<String,Integer> typeList = blogServiceImpl.getBlogType();
+			Blogger blogger = bloggerServiceImpl.getBloggerInfoById(1);
 			List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
+			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("blogger", blogger);
-			map.put("links", links);
-			map.put("blogDate", blogDate);
-			map.put("typeBlogs", typeBlogs);
+			map.put("links", linkList);
+			map.put("blogDate", dateList);
+			map.put("typeBlogs", typeList);
 			map.put("currPage", currPage);
 			map.put("typeId", typeId);
 			map.put("searchDate", searchDate);

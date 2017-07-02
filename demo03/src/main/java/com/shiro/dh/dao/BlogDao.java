@@ -11,6 +11,7 @@ package com.shiro.dh.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.shiro.dh.dao.custom.BlogCustom;
 import com.shiro.dh.entity.Blog;
 
 /**  
@@ -22,7 +23,7 @@ import com.shiro.dh.entity.Blog;
  * @since    JDK 1.7  
  * @see        
  */
-public interface BlogDao extends JpaRepository<Blog,Long>{
+public interface BlogDao extends JpaRepository<Blog,Long>,BlogCustom{
 
 }
   

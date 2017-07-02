@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,27 +48,27 @@ public class CommentController extends BaseController {
 	}
 	
 	@RequestMapping("findAllMsg")
+	@RequiresPermissions("message:query")
 	@ResponseBody
 	public List<MessageBoard> getAllMsg(){
 		return messageBoardServiceImpl.queryMsg();
 	}
 	
 	@RequestMapping("updateMsg")
+	@RequiresPermissions("message:update")
 	@ResponseBody
-	public MessageBoard  updateMsg(String id){
-		MessageBoard msg = messageBoardServiceImpl.findMessageById(Convert.strToLong(id, -1));
-		if(msg!=null){
-			msg.setStatus(true);
-			msg.setUse(true);
-		}
-		return messageBoardServiceImpl.save(msg);
+	public MessageBoard  updateMsg(long id){
+		MessageBoard msg = messageBoardServiceImpl.findMessageById(id);
+		
+		return messageBoardServiceImpl.update(msg);
 	}
 	
 	@RequestMapping("deleteMsg")
+	@RequiresPermissions("message:del")
 	@ResponseBody
-	public int deleteMsg(String id){
+	public int deleteMsg(long id){
 		
-		messageBoardServiceImpl.deleteById(Convert.strToLong(id, -1));
+		messageBoardServiceImpl.deleteById(id);
 		
 		return 1;
 	}

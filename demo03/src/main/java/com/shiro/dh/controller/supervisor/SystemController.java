@@ -9,6 +9,7 @@
   
 package com.shiro.dh.controller.supervisor;  
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,7 @@ import com.shiro.dh.util.ErrorInfo;
 public class SystemController extends BaseController{
 	
 	@RequestMapping("updateBloggerInfo")
+	@RequiresPermissions("system:update")
 	@ResponseBody
 	public ErrorInfo updateBloggerInfo(Blogger blogger){
 		ErrorInfo error = new ErrorInfo();

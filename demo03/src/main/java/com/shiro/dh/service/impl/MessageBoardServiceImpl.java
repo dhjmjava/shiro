@@ -10,6 +10,7 @@
 package com.shiro.dh.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -35,9 +36,7 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 
 	@Override
 	public List<MessageBoard> queryAll() {
-		
 		return messageBoardDao.findAll();
-		
 	}
 
 	@Override
@@ -52,11 +51,16 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 
 	@Override
 	public MessageBoard save(MessageBoard msg) {
+		msg.setPublishTime(Calendar.getInstance().getTime());
+		msg.setStatus(false);
+		msg.setUse(false);
 		return messageBoardDao.save(msg);
 	}
-
+	
 	@Override
 	public MessageBoard update(MessageBoard msg) {
+		msg.setStatus(true);
+		msg.setUse(true);
 		return messageBoardDao.save(msg);
 	}
 
@@ -64,11 +68,11 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	public List<MessageBoard> queryMsg() {
 		  
 		Order o1 = new Order(Direction.ASC, "status");
-		Order o2 = new Order(Direction.ASC, "isUse");
+		//Order o2 = new Order(Direction.ASC, "isUse");
 		Order o3 = new Order(Direction.DESC, "publishTime");
 		List<Order> orders = new ArrayList<>();
 		orders.add(o1);
-		orders.add(o2);
+		//orders.add(o2);
 		orders.add(o3);
 		Sort sort = new Sort(orders);
 		Iterable<MessageBoard> iterables = messageBoardDao.findAll(sort);

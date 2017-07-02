@@ -31,9 +31,7 @@ public class LinkServiceImpl extends BaseService implements LinkService {
 
 	@Override
 	public List<Link> getLinkList() {
-		
 		return linkDao.findAll();
-		
 	}
 
 	@Override
@@ -42,17 +40,8 @@ public class LinkServiceImpl extends BaseService implements LinkService {
 	}
 
 	@Override
-	public Link addLink(Link link) {
-		  
+	public Link saveOrUpdate(Link link) {
 		return linkDao.save(link);
-		
-	}
-
-	@Override
-	public Link updateLink(Link link) {
-		  
-		return linkDao.save(link);
-		
 	}
 
 	@Override

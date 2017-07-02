@@ -23,7 +23,7 @@
 						<th data-options="field:'blogType',align:'center'" width="100">所属类别</th>
 						<th data-options="field:'publishTimeText',align:'center'" width="80">发布时间</th>
 						<th data-options="field:'readCount',align:'center'" width="80">阅读量</th>
-						<th data-options="field:'isUse',formatter:formatStatus,align:'center'" width="70">状态</th>
+						<th data-options="field:'isUseText',align:'center'" width="70">状态</th>
 						<th data-options="field:'status',formatter:formatCZ,align:'center'" width="80">操作</th>
 					</tr>
 				</thead>
@@ -46,9 +46,6 @@
 	}
 	function formatCZ(value,row,index){
 		return '<span onclick="update('+row.id+')"><a href="#">修改</a></span>&nbsp;&nbsp;<span onclick="deleteBlog('+row.id+')"><a href="#">删除</a></span>';
-	}
-	function formatStatus(value,row,index){
-		return value?'<font color="green">显示</font>':'<font color="red">隐藏</font>';
 	}
 	function update(id){
 		window.location.href="/supervisor/update_blog.html?id="+id;

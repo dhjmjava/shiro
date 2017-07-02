@@ -38,18 +38,11 @@ public interface LinkService {
 	 void deleteLink(long id);
 	
 	/**
-	 * 增加link
+	 * 保存或更新link
 	 * @param link
 	 * @return
 	 */
-	 Link addLink(Link link);
-	
-	/**
-	 * 更新link
-	 * @param link
-	 * @return
-	 */
-	 Link updateLink(Link link);
+	 Link saveOrUpdate(Link link);
 	
 	/**
 	 * 根据id获取link

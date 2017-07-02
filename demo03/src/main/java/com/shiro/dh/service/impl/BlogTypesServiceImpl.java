@@ -45,7 +45,7 @@ public class BlogTypesServiceImpl extends BaseService implements BlogTypesServic
 
 	@Override
 	public BlogTypes saveOrUpdateType(BlogTypes type) {
-		  
+		 
 		return blogTypesDao.save(type);
 		
 	}

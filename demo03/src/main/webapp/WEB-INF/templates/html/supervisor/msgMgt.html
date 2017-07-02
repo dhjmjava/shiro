@@ -21,11 +21,11 @@
 						<th data-options="field:'itemid',formatter:formatXH,align:'center'" width="30">序号</th>
 						<th data-options="field:'msgContent',align:'center'" width="150">留言内容</th>
 						<th data-options="field:'userName',align:'center'" width="80">名称</th>
-						<th data-options="field:'publishTime',align:'center'" width="80">发表时间</th>
+						<th data-options="field:'publishTimeText',align:'center'" width="80">发表时间</th>
 						<th data-options="field:'email',align:'center'" width="80">邮箱</th>
 						<th data-options="field:'readCount',align:'center'" width="80">ip</th>
 						<th data-options="field:'status',formatter:formatStatus,align:'center'" width="80">状态</th>
-						<th data-options="field:'isUse',formatter:formatJG,align:'center'" width="80">是否通过</th>
+						<th data-options="field:'isUseText',align:'center'" width="80">是否通过</th>
 						<th data-options="field:'cz',formatter:formatCZ,align:'center'" width="80">操作</th>
 					</tr>
 				</thead>
@@ -44,9 +44,6 @@
 	}
 	function formatStatus(value,row,index){
 		return value?'<font color="green">已审核</font>':'<font color="red">未审核</font>';
-	}
-	function formatJG(value,row,index){
-		return row.use?'<font color="green">已通过</font>':'<font color="red">未通过</font>';
 	}
 	
 	function update(id){

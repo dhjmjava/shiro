@@ -10,6 +10,7 @@
 package com.shiro.dh.dao.custom;
 
 import java.util.List;
+import java.util.Map;
 
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.queryGraphDocBuilder;
 import org.springframework.stereotype.Repository;
@@ -28,9 +29,9 @@ import com.shiro.dh.entity.Blog;
 @Repository
 public interface BlogCustom {
 	
-	public List<Blog> queryByDate();
+	public List<Map<String,Integer>>  queryByDate();
 	
-	public List<Blog> queryByType();
+	public Map<String,Integer> queryByType();
 
 }
   

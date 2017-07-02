@@ -9,7 +9,11 @@
   
 package com.shiro.dh.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.MessageBoard;
@@ -25,6 +29,15 @@ import com.shiro.dh.entity.MessageBoard;
  */
 @Repository
 public interface MessageBoardDao extends JpaRepository<MessageBoard, Long>{
+	
+	//nativeQuery=true，标示此方法为原生查询
+	@Query(value="select * from t_messageBoard where status=1 and is_use=1 order by publish_time desc",nativeQuery=true)
+	List<MessageBoard> queryMessage();
+	
+	//更新方法需要使用@Modifying注解
+	@Modifying
+	@Query(value="update MessageBoard set status=?1,isUse=?2 where messageId=?3")
+	MessageBoard updateMessage(boolean status,boolean isUse,long messageId);
 
 }
   

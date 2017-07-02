@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,28 +36,28 @@ import com.shiro.dh.util.ErrorInfo;
 public class LinkController extends BaseController{
 	
 	@RequestMapping("findAllLink")
+	@RequiresPermissions("link:queryAll")
 	public List<Link> findAllLinks(){
 		return linkServiceImpl.getLinkList();
 	}
 	
 	@RequestMapping("findLinkById")
+	@RequiresPermissions("link:queryById")
 	public Link findLinkById(String id){
 		return linkServiceImpl.getLinkById(Convert.strToLong(id, -1));
 	}
 	
 	@RequestMapping("saveOrUpdate")
+	@RequiresPermissions("link:saveOrUpdate")
 	public ErrorInfo submitLink(HttpServletRequest request,Link link){
 		ErrorInfo error = new ErrorInfo();
-		if(link.getId()!=0){
-			linkServiceImpl.updateLink(link);
-		}else{
-			linkServiceImpl.addLink(link);
-		}
+		linkServiceImpl.saveOrUpdate(link);
 		 
 		return error;
 	}
 	
 	@RequestMapping("deleteLink")
+	@RequiresPermissions("link:del")
 	public ErrorInfo deleteLink(HttpServletRequest request,String id){
 	   ErrorInfo error = new ErrorInfo();
 	   linkServiceImpl.deleteLink(Convert.strToLong(id, -1));

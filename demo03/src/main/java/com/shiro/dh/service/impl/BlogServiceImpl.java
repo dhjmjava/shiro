@@ -10,6 +10,7 @@
 package com.shiro.dh.service.impl;  
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -45,16 +46,16 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	}
 
 	@Override
-	public List<Blog> getBlogDate() {
-		  
-		return null;
+	public List<Map<String,Integer>> getBlogDate() {
+		
+		return blogDao.queryByDate();
 		
 	}
 
 	@Override
-	public List<Blog> getBlogType() {
-		  
-		return null;
+	public Map<String,Integer> getBlogType() {
+		 
+		return blogDao.queryByType();
 		
 	}
 

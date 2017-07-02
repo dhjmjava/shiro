@@ -18,6 +18,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 //github.com/dhjmjava/shiro.git
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.shiro.dh.util.DateUtil;
 
 /**  
  * ClassName:MessageBoard <br/>  
@@ -34,7 +37,7 @@ public class MessageBoard implements Serializable{
 	
 	private static final long serialVersionUID = -8957261577189231998L;
 	
-	private int messageId;
+	private long messageId;
 	private String msgContent;//留言内容
 	private Date publishTime;//发表时间	
 	private String userName;//用户名称
@@ -47,12 +50,12 @@ public class MessageBoard implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="msg_id")
-	public int getMessageId() {
+	@Column(name="message_id")
+	public long getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(long messageId) {
 		this.messageId = messageId;
 	}
 
@@ -74,7 +77,12 @@ public class MessageBoard implements Serializable{
 		this.publishTime = publishTime;
 	}
 	
-	@Column(name="username")
+	@Transient
+	public String getPublishTimeText(){
+		return DateUtil.dateToString(this.publishTime);
+	}
+	
+	@Column(name="user_name")
 	public String getUserName() {
 		return userName;
 	}
@@ -83,6 +91,7 @@ public class MessageBoard implements Serializable{
 		this.userName = userName;
 	}
 
+	@Column(name="email")
 	public String getEmail() {
 		return email;
 	}
@@ -91,6 +100,7 @@ public class MessageBoard implements Serializable{
 		this.email = email;
 	}
 
+	@Column(name="ip")
 	public String getIp() {
 		return ip;
 	}
@@ -99,12 +109,18 @@ public class MessageBoard implements Serializable{
 		this.ip = ip;
 	}
 
+	@Column(name="status")
 	public boolean isStatus() {
 		return status;
 	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	@Transient
+	public String getStatusText(){
+		return this.status?"<font color='green'>已审核</font>":"<font color='red'>未审核</font>";
 	}
 
 	@Column(name="is_use")
@@ -114,6 +130,11 @@ public class MessageBoard implements Serializable{
 
 	public void setUse(boolean isUse) {
 		this.isUse = isUse;
+	}
+	
+	@Transient
+	public String getIsUseText(){
+		return this.isUse?"<font color='green'>通过</font>":"<font color='red'>不通过</font>";
 	}
 	
 }
