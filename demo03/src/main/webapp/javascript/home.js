@@ -9,12 +9,10 @@ $(function(){
 	      type: "GET",
 	      cache: false,
 	      success: function (data) {
-	    	  var typeBlogs = data.typeBlogs;
-	    	  var blogDate = data.blogDate;
+	    	  var typeList = data.typeList;
+	    	  var dateList = data.dateList;
 	    	  var links = data.links;
 	    	  var blogger = data.blogger;
-	    	  var searchDate = data.searchDate;
-	    	  var typeId = data.typeId;
 	    	  var msgs=data.msgs;
 	    	  var commLink ='';
 	    	  var commDate='';
@@ -23,11 +21,11 @@ $(function(){
 	    	  $.each(links,function(n,value){
 	    		  commLink=commLink+'<li><span><a href='+value.url+' target="_blank">'+value.name+'</a></span></li>'
 	    	  })
-	    	  $.each(blogDate,function(n,value){
-	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="dateSearch(this)" month="'+value.months+'">'+value.months+'</a>&nbsp;(<span>'+value.blogCount+'</span>)</span></li>';
+	    	  $.each(dateList,function(key,value){
+	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="dateSearch(this)" month="'+key+'">'+key+'</a>&nbsp;(<span>'+value+'</span>)</span></li>';
 	    	  })
-	    	  $.each(typeBlogs,function(n,value){
-	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="typeSearch(this)" tid="'+value.blogType+'">'+value.name+'</a>&nbsp; (<span>'+value.typeCount+'</span>)</span></li>';
+	    	  $.each(typeList,function(key,value){
+	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="typeSearch(this)" tid="">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
 	    	  })
 	    	   $.each(msgs,function(n,value){
 	    		   msgStr=msgStr+'<li><span>'+(n+1)+'、'+value.msgContent+'</span></li>';

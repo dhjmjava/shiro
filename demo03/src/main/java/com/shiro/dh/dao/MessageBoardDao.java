@@ -9,14 +9,18 @@
   
 package com.shiro.dh.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.shiro.dh.entity.MessageBoard;
 
 /**  
  * ClassName:MessageBoardDao <br/>  
- * Function: TODO ADD FUNCTION. <br/>  
+ * Function: 留言接口. <br/>  
  * Date:     2017年6月14日 上午6:49:44 <br/>  
  * @author   daihui  
  * @version    
@@ -26,5 +30,14 @@ import com.shiro.dh.entity.MessageBoard;
 @Repository
 public interface MessageBoardDao extends JpaRepository<MessageBoard, Long>{
 
+   //nativeQuery=true，标记此方法为原生sql查询
+   @Query(value="select * from t_message_board where is_use=1 order by publish_time desc limit 10",nativeQuery=true)	
+   List<MessageBoard> queryMessage();
+   
+   //修改需要使用@Modifying注解标注
+   @Modifying
+   @Query(value="update MessageBoard a set a.status=?1,a.isUse=?2")
+   MessageBoard updateMessage(boolean status,boolean isUse);
+   
 }
   

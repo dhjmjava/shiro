@@ -44,11 +44,13 @@
 		    <li id="pageDown"><a href="javascript:;" id="pageDown" onclick="pageDown();">下一页</a></li>
 		    <li><a href='javascript:;' onclick="pageEnd()">尾页</a></li>
 		  </ul>
-		    <!-- <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div> -->
+
+		    <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div>
 		</nav>
 	 </div>
 	  	
 	  </div>
+
 	  
        <!-- 右边  -->
 	   <div id="right" th:include="common/right :: righter"></div>
@@ -66,11 +68,10 @@
 		<input type="hidden" name="currPage" id="currPage"/>
 		<input type="hidden" name="pageSize" id="pageSize" value="10" />
     </form>
-	
-	
-	<!-- <script type="text/javascript" th:inline="javascript">
-		var pageNumber = [[${page.pageNumber.size()}]];
-	</script> --> 
+
+	<script th:inline="javascript">
+	   var pageNumber = [[${page.pageNumber.size()}]];
+	</script> 
 	<script th:src="@{/javascript/home.js}"></script>
   </body>
 </html>

@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,24 +47,53 @@ public class CommentController extends BaseController {
 		
 	}
 	
+	/**
+	 * 
+	 * getAllMsg:查找所有留言. <br/>   
+	 *   
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:00
+	 */
 	@RequestMapping("findAllMsg")
+	@RequiresPermissions("message:query")
 	@ResponseBody
 	public List<MessageBoard> getAllMsg(){
 		return messageBoardServiceImpl.queryMsg();
 	}
 	
+	/**
+	 * 
+	 * updateMsg:更新留言. <br/>   
+	 *   
+	 * @param id
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:21
+	 */
 	@RequestMapping("updateMsg")
+	@RequiresPermissions("message:update")
 	@ResponseBody
 	public MessageBoard  updateMsg(String id){
 		MessageBoard msg = messageBoardServiceImpl.findMessageById(Convert.strToLong(id, -1));
 		if(msg!=null){
 			msg.setStatus(true);
-			msg.setUse(true);
+			msg.setIsUse(true);
 		}
 		return messageBoardServiceImpl.save(msg);
 	}
 	
+	/**
+	 * 
+	 * deleteMsg:删除留言. <br/>   
+	 *   
+	 * @param id
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:52
+	 */
 	@RequestMapping("deleteMsg")
+	@RequiresPermissions("message:del")
 	@ResponseBody
 	public int deleteMsg(String id){
 		

@@ -36,7 +36,7 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	@Override
 	public List<MessageBoard> queryAll() {
 		
-		return messageBoardDao.findAll();
+		return messageBoardDao.queryMessage();
 		
 	}
 
@@ -46,8 +46,8 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	}
 
 	@Override
-	public void deleteById(long msgId) {
-		 messageBoardDao.delete(msgId);
+	public void deleteById(long messageId) {
+		 messageBoardDao.delete(messageId);
 	}
 
 	@Override
@@ -64,11 +64,11 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	public List<MessageBoard> queryMsg() {
 		  
 		Order o1 = new Order(Direction.ASC, "status");
-		Order o2 = new Order(Direction.ASC, "isUse");
+		//Order o2 = new Order(Direction.ASC, "is_use");
 		Order o3 = new Order(Direction.DESC, "publishTime");
 		List<Order> orders = new ArrayList<>();
 		orders.add(o1);
-		orders.add(o2);
+		//orders.add(o2);
 		orders.add(o3);
 		Sort sort = new Sort(orders);
 		Iterable<MessageBoard> iterables = messageBoardDao.findAll(sort);

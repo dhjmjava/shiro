@@ -2,19 +2,23 @@
  * Project Name:demo03  
  * File Name:StringUtil.java  
  * Package Name:com.shiro.dh.util  
+<<<<<<< HEAD
  * Date:2017年7月1日下午11:59:20  
+=======
+ * Date:2017年7月1日上午10:47:24  
+>>>>>>> 77f930caba7ead22d10741524aa8776434deb010
  * Copyright (c) 2017, jingmendh@163.com All Rights Reserved.  
  *  
 */  
   
-package com.shiro.dh.util;  
+package com.shiro.dh.util;
+
 /**  
  * ClassName:StringUtil <br/>  
  * Function: 字符串工具类. <br/>  
- * Date:     2017年7月1日 下午11:59:20 <br/>  
- * @author   daihui  
- * @version    
- * @since    JDK 1.7  
+ * Date:     2017年7月1日 上午10:47:24 <br/>  
+ * @author   daihui     
+ * @since    JDK 1.7
  * @see        
  */
 public class StringUtil {
