@@ -42,10 +42,10 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	 * 
 	 * getBlogPage:前台分页查询 <br/>   
 	 *   
-	 * @param offset
-	 * @param limit
-	 * @param blogType
-	 * @param time
+	 * @param offset 当前页
+	 * @param limit 每页条数
+	 * @param blogType  类型
+	 * @param time  时间
 	 * @return  
 	 * @author daihui
 	 * Date:2017年7月1日上午11:37:14
@@ -57,7 +57,7 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 		page.page = list;
 		page.currPage = offset;
 		page.pageSize = limit;
-		page.totalCount = list.size();
+		page.totalCount = (int)blogDao.count();
 		page.setPageNumber(page.totalCount);
 		
 		return page;

@@ -31,7 +31,7 @@ import com.shiro.dh.entity.MessageBoard;
 public interface MessageBoardDao extends JpaRepository<MessageBoard, Long>{
 	
 	//nativeQuery=true，标示此方法为原生查询
-	@Query(value="select * from t_messageBoard where status=1 and is_use=1 order by publish_time desc",nativeQuery=true)
+	@Query(value="select * from t_message_board where status=1 and is_use=1 order by publish_time desc limit 10",nativeQuery=true)
 	List<MessageBoard> queryMessage();
 	
 	//更新方法需要使用@Modifying注解

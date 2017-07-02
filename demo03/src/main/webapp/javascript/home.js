@@ -1,6 +1,3 @@
-
-var currPage=null;
-var totalCount=null;
 $(function(){
 	//加载条件搜索数据
 	 $.ajax({
@@ -25,7 +22,7 @@ $(function(){
 	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="dateSearch(this)" month="'+key+'">'+key+'</a>&nbsp;(<span>'+value+'</span>)</span></li>';
 	    	  })
 	    	  $.each(typeList,function(key,value){
-	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="typeSearch(this)" tid="">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
+	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="query(this)">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
 	    	  })
 	    	   $.each(msgs,function(n,value){
 	    		   msgStr=msgStr+'<li><span>'+(n+1)+'、'+value.msgContent+'</span></li>';
@@ -37,12 +34,27 @@ $(function(){
 	    	  $("#msgs").html(msgStr);
 	    	  $("#nickName").text(blogger.userName);
 	    	  $("#userSign").text(blogger.motto);
-	    	  $("#typeId").val(typeId);
-	    	  $("#searchDate").val(searchDate);
-	    	  $("#currPage").val(currPage);
 	      }
 	  });
 }) 
+
+function query(pageUp,pageDown,blogType,time){
+	if(pageUp){
+		if(currPage == 1 || currPage==null){
+			$("#pageUp").attr("class","disabled");
+			return ;
+		}
+		$("#currPage").val(parseInt(currPage)-1);
+	}
+	if(pageDown){
+		if(currPage==null||currPage == pageNumber){
+			$("#pageDown").attr("class","disabled");
+			return ;
+		}
+		$("#currPage").val( parseInt(currPage)+1);
+	}
+	$("#homeForm").submit();
+}
 
 $(".jump").each(function(){
 	var j = $(this);
@@ -50,26 +62,6 @@ $(".jump").each(function(){
 		j.parent().attr("class","active");
 	}
 })
-
-//上一页
-function pageUp(){
-	if(currPage == 1 || currPage==null){
-		$("#pageUp").attr("class","disabled");
-		return false;
-	}
-	$("#currPage").val(parseInt($("#currPage").val())-1);
-	$("#homeForm").submit();
-}
-
-//下一页
-function pageDown(){
-	if(currPage==null||currPage == pageNumber){
-		$("#pageDown").attr("class","disabled");
-		return false;
-	}
-	$("#currPage").val( parseInt($("#currPage").val())+1);
-	$("#homeForm").submit();
-}
 
 //尾页
 function pageEnd(){

@@ -39,6 +39,7 @@ import com.shiro.dh.util.Convert;
 import com.shiro.dh.util.ErrorInfo;
 import com.shiro.dh.util.IpUtil;
 import com.shiro.dh.util.Page;
+import com.shiro.dh.util.StringUtil;
 
 /**  
  * ClassName:indexController <br/>  
@@ -52,22 +53,10 @@ import com.shiro.dh.util.Page;
 @Controller
 public class HomeController extends BaseController{
 	Logger logger = Logger.getLogger(HomeController.class);
-	
-	/**
-	 * 
-	 * initBinder:(注册该类进行参数控制). <br/>   
-	 * @author daihui  
-	 * @param binder  
-	 * @since JDK 1.7
-	 */
-	/*@InitBinder
-	public void initBinder(WebDataBinder binder) {
-	   binder.registerCustomEditor(String.class, new StringEscapeEditor(false, false, false));
-	}*/
 
 	/**
 	 * 
-	 * home:(进入首页). <br/>   
+	 * home:(首页). <br/>   
 	 *  
 	 * @author daihui  
 	 * @param model
@@ -78,14 +67,15 @@ public class HomeController extends BaseController{
     @RequestMapping("/")
     public String home(Model model,HttpServletRequest request) {
     	
-    	int currPage = Convert.strToInt(request.getParameter("currPage"), 1);
-    	int pageSize = Constants.TEN;
-    	long typeId = Convert.strToLong(request.getParameter("typeId"), -1);
+    	String currPage = request.getParameter("currPage");
+    	String typeId = request.getParameter("typeId");
     	String searchDate = request.getParameter("searchDate");
     	
-    	Page<Blog> page = blogServiceImpl.getBlogPage(currPage,pageSize,typeId,searchDate);
-    	
+    	Page<Blog> page = blogServiceImpl.getBlogPage(Convert.strToInt(currPage,1),Constants.TEN,Convert.strToLong(typeId,-1),searchDate);
+    	model.addAttribute("typeId", typeId);
+    	model.addAttribute("searchDate", searchDate);
     	model.addAttribute("page", page);
+    	
         return "home";
     }
     
@@ -220,28 +210,22 @@ public class HomeController extends BaseController{
 	@RequestMapping(value= "/common",  method = RequestMethod.GET)
 	@ResponseBody
 	public String common(HttpServletRequest request){
-		
-		int currPage = Convert.strToInt(request.getParameter("currPage"), 1);
-    	long typeId = Convert.strToLong(request.getParameter("typeId"), -1);
-    	String searchDate = request.getParameter("searchDate");
 		try{
-			List<Link> links = linkServiceImpl.getLinkList();
-			Map<String,String> dateList = blogServiceImpl.getBlogDate();
-			Map<String,String> typeList = blogServiceImpl.getBlogType();
-			Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
-			List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("blogger", blogger);
-			map.put("links", links);
-			map.put("dateList", dateList);
-			map.put("typeList", typeList);
-			map.put("currPage", currPage);
-			map.put("typeId", typeId);
-			map.put("searchDate", searchDate);
-			map.put("msgs",msgs.size()>5?msgs.subList(0, 5):msgs);
-			String json = JSON.toJSONString(map); 
-			return json;
+				List<Link> links = linkServiceImpl.getLinkList();
+				Map<String,String> dateList = blogServiceImpl.getBlogDate();
+				Map<String,String> typeList = blogServiceImpl.getBlogType();
+				Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
+				List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("blogger", blogger);
+				map.put("links", links);
+				map.put("dateList", dateList);
+				map.put("typeList", typeList);
+				map.put("msgs",msgs);
+				String json = JSON.toJSONString(map); 
+				
+				return json;
 			}catch(Exception e){
 				e.printStackTrace();
 			}

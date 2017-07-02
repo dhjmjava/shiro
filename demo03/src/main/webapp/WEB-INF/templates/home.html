@@ -15,7 +15,6 @@
 <div class="container">
 	<!-- 头部  -->
 	<div id="header" th:include="common/header :: copy"></div>
-	
 	<div class="row">
 	  <div class="col-md-9">
 	  	<div class="data_list">
@@ -39,38 +38,34 @@
 		<nav>
 		  <ul class="pagination pagination-sm">
 		    <li><a href="/">首页</a></li>
-		    <li id="pageUp"><a href="javascript:;"  onclick="pageUp();">上一页</a></li>
+		    <li id="pageUp"><a href="javascript:;"  onclick="query(true,false,null,null);">上一页</a></li>
 		    <li th:each="num,numStat:${page?.pageNumber}"><a href="javascript:;" class="jump" th:id="num+${num}" th:text="${num}">1</a></li>
-		    <li id="pageDown"><a href="javascript:;" id="pageDown" onclick="pageDown();">下一页</a></li>
+		    <li id="pageDown"><a href="javascript:;" id="pageDown" onclick="query(false,true,null,null);">下一页</a></li>
 		    <li><a href='javascript:;' onclick="pageEnd()">尾页</a></li>
 		  </ul>
 
-		    <div style="margin-left: 300px;margin-top: -45px;">共<span id="totalCount"></span>篇</div>
+		    <div style="margin-left: 300px;margin-top: -45px;">共&nbsp;&nbsp;<span id="totalCount" th:value="${page.totalCount}"></span>&nbsp;&nbsp;篇</div>
 		</nav>
 	 </div>
-	  	
 	  </div>
-
-	  
        <!-- 右边  -->
 	   <div id="right" th:include="common/right :: righter"></div>
-		  
-		</div>
-		
-		<!-- 底部 -->
-		<div id="foot" th:include="common/footer :: foot"></div>
-		
+	</div>
+	   <!-- 底部 -->
+	   <div id="foot" th:include="common/footer :: foot"></div>
 	</div>
 	
 	<form action="/" accept-charset="UTF-8" method="GET"  id="homeForm">
 		<input type="hidden" name="typeId" id="typeId" th:value="${typeId}"/>
-		<input type="hidden" name="searchDate" id="searchDate"/>
+		<input type="hidden" name="searchDate" id="searchDate" th:value="${searchDate}"/>
 		<input type="hidden" name="currPage" id="currPage"/>
-		<input type="hidden" name="pageSize" id="pageSize" value="10" />
     </form>
 
 	<script th:inline="javascript">
 	   var pageNumber = [[${page.pageNumber.size()}]];
+	   var currPage = [[${page.currPage}]];
+	   var totalCount = [[${page.totalCount}]];
+	   $("#totalCount").text(totalCount);
 	</script> 
 	<script th:src="@{/javascript/home.js}"></script>
   </body>
