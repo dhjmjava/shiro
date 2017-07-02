@@ -38,23 +38,40 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 		
 	}
 
+	/**
+	 * 
+	 * getBlogPage:前台分页查询 <br/>   
+	 *   
+	 * @param offset
+	 * @param limit
+	 * @param blogType
+	 * @param time
+	 * @return  
+	 * @author daihui
+	 * Date:2017年7月1日上午11:37:14
+	 */
 	@Override
-	public Page<Blog> getBlogPage(int currPage, int pageSize, long typeId, String searchDate) {
-		  
-		return null;
+	public Page<Blog> getBlogPage(int offset, int limit, long blogType, String time) {
+		List<Blog> list = blogDao.queryPagination(offset,limit,blogType,time);
+		Page<Blog> page = new Page<Blog>();
+		page.page = list;
+		page.currPage = offset;
+		page.pageSize = limit;
+		page.totalCount = list.size();
+		page.setPageNumber(page.totalCount);
+		
+		return page;
 		
 	}
 
 	@Override
-	public List<Map<String,Integer>> getBlogDate() {
-		
+	public Map<String, String> getBlogDate() {
 		return blogDao.queryByDate();
-		
 	}
 
 	@Override
-	public Map<String,Integer> getBlogType() {
-		 
+	public Map<String,String> getBlogType() {
+
 		return blogDao.queryByType();
 		
 	}
@@ -82,7 +99,7 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 
 	@Override
 	public List<Blog> findAll() {
-		  
+		
 		return blogDao.findAll();
 		
 	}

@@ -55,6 +55,12 @@ public class BlogController extends BaseController{
        return 	blogTypesServiceImpl.getAllBlogTypes();	
 	}
 	
+	@RequestMapping("findById")
+	@RequiresPermissions("blog:findById")
+	public Blog queryById(long id){
+		return blogServiceImpl.getBlogById(id);
+	}
+	
 	
 	/**
 	 * submitBlog:(新增博客). <br/>   
@@ -71,8 +77,6 @@ public class BlogController extends BaseController{
 		Blog result = blogServiceImpl.saveOrUpdateBlog(blog);
 		
 		index.index(result);
-		
-		
 		return error;
 	}
 	

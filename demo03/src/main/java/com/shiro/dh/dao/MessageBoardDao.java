@@ -20,7 +20,7 @@ import com.shiro.dh.entity.MessageBoard;
 
 /**  
  * ClassName:MessageBoardDao <br/>  
- * Function: TODO ADD FUNCTION. <br/>  
+ * Function: 留言接口. <br/>  
  * Date:     2017年6月14日 上午6:49:44 <br/>  
  * @author   daihui  
  * @version    
@@ -38,6 +38,6 @@ public interface MessageBoardDao extends JpaRepository<MessageBoard, Long>{
 	@Modifying
 	@Query(value="update MessageBoard set status=?1,isUse=?2 where messageId=?3")
 	MessageBoard updateMessage(boolean status,boolean isUse,long messageId);
-
+   
 }
   

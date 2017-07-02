@@ -35,8 +35,8 @@ import com.shiro.dh.service.MessageBoardService;
 public class MessageBoardServiceImpl extends BaseService implements MessageBoardService{
 
 	@Override
-	public List<MessageBoard> queryAll() {
-		return messageBoardDao.findAll();
+	public List<MessageBoard> queryAll() {	
+		return messageBoardDao.queryMessage();
 	}
 
 	@Override
@@ -45,22 +45,22 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	}
 
 	@Override
-	public void deleteById(long msgId) {
-		 messageBoardDao.delete(msgId);
+	public void deleteById(long messageId) {
+		 messageBoardDao.delete(messageId);
 	}
 
 	@Override
 	public MessageBoard save(MessageBoard msg) {
 		msg.setPublishTime(Calendar.getInstance().getTime());
 		msg.setStatus(false);
-		msg.setUse(false);
+		msg.setIsUse(false);
 		return messageBoardDao.save(msg);
 	}
 	
 	@Override
 	public MessageBoard update(MessageBoard msg) {
 		msg.setStatus(true);
-		msg.setUse(true);
+		msg.setIsUse(true);
 		return messageBoardDao.save(msg);
 	}
 
@@ -68,7 +68,7 @@ public class MessageBoardServiceImpl extends BaseService implements MessageBoard
 	public List<MessageBoard> queryMsg() {
 		  
 		Order o1 = new Order(Direction.ASC, "status");
-		//Order o2 = new Order(Direction.ASC, "isUse");
+        //Order o2 = new Order(Direction.ASC, "is_use");
 		Order o3 = new Order(Direction.DESC, "publishTime");
 		List<Order> orders = new ArrayList<>();
 		orders.add(o1);

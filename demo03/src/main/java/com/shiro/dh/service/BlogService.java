@@ -52,13 +52,16 @@ public interface BlogService {
 	 * 根据发布日期分类
 	 * @return
 	 */
-	 List<Map<String,Integer>> getBlogDate();
+
+	 Map<String, String> getBlogDate();
+
 	
 	/**
 	 * 根据博客类型分类
 	 * @return
 	 */
-	 Map<String,Integer> getBlogType();
+
+	 Map<String,String> getBlogType();
 	
 	/**
 	 * 根据id删除博客

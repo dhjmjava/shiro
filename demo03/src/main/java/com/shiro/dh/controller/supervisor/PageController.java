@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shiro.dh.controller.BaseController;
-import com.shiro.dh.util.Convert;
 
 /**  
  * ClassName:PageController <br/>  
@@ -49,10 +48,9 @@ public class PageController extends BaseController{
 	}
 	
 	@RequestMapping("update_blog.html")
-	@RequiresPermissions("blog:update")//shiro权限注解;
+	@RequiresPermissions("blog:updatePage")//shiro权限注解;
 	public String updateBlog(String id,Model model){
-		model.addAttribute("types", blogTypesServiceImpl.getAllBlogTypes());
-		model.addAttribute("blog",blogServiceImpl.getBlogById(Convert.strToLong(id, -1)));
+		model.addAttribute("id",id);
 		return "html/supervisor/update_blog";
 	}
 	

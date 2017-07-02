@@ -8,18 +8,16 @@
  */
 package com.shiro.dh.config;
 
-import java.util.LinkedHashMap;  
-import java.util.Map;  
-  
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.mgt.SecurityManager;  
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;  
-import org.apache.shiro.spring.web.ShiroFilterFactoryBean;  
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;  
-import org.springframework.context.annotation.Bean;  
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.shiro.dh.realms.ShiroRealm;
@@ -50,16 +48,15 @@ public class ShiroConfiguration {
         //配置退出过滤器,  
         filterChainDefinitionMap.put("/supervisor/logout", "logout"); 
         //配置静态文件可以匿名访问
-        filterChainDefinitionMap.put("/bootstrap3/**", "anon");
+        /*filterChainDefinitionMap.put("/bootstrap3/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/datimeday/**", "anon");
         filterChainDefinitionMap.put("/easyui/**", "anon");
         filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/javascript/**", "anon");
-        filterChainDefinitionMap.put("/utf8-jsp/**", "anon");
+        filterChainDefinitionMap.put("/utf8-jsp/**", "anon");*/
         //配置前台页面可以匿名访问
         filterChainDefinitionMap.put("/**", "anon");//首页
-        
         
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 --> 
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->  

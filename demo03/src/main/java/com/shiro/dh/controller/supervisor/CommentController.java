@@ -47,6 +47,14 @@ public class CommentController extends BaseController {
 		
 	}
 	
+	/**
+	 * 
+	 * getAllMsg:查找所有留言. <br/>   
+	 *   
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:00
+	 */
 	@RequestMapping("findAllMsg")
 	@RequiresPermissions("message:query")
 	@ResponseBody
@@ -54,15 +62,32 @@ public class CommentController extends BaseController {
 		return messageBoardServiceImpl.queryMsg();
 	}
 	
+	/**
+	 * 
+	 * updateMsg:更新留言. <br/>   
+	 *   
+	 * @param id
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:21
+	 */
 	@RequestMapping("updateMsg")
 	@RequiresPermissions("message:update")
 	@ResponseBody
 	public MessageBoard  updateMsg(long id){
-		MessageBoard msg = messageBoardServiceImpl.findMessageById(id);
-		
+		MessageBoard msg = messageBoardServiceImpl.findMessageById(id);	
 		return messageBoardServiceImpl.update(msg);
 	}
 	
+	/**
+	 * 
+	 * deleteMsg:删除留言. <br/>   
+	 *   
+	 * @param id
+	 * @return  
+	 * @author daihui
+	 * Date:2017年6月23日下午10:32:52
+	 */
 	@RequestMapping("deleteMsg")
 	@RequiresPermissions("message:del")
 	@ResponseBody

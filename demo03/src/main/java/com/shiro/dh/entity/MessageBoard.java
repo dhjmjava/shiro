@@ -76,12 +76,12 @@ public class MessageBoard implements Serializable{
 	public void setPublishTime(Date publishTime) {
 		this.publishTime = publishTime;
 	}
-	
+
 	@Transient
 	public String getPublishTimeText(){
 		return DateUtil.dateToString(this.publishTime);
 	}
-	
+
 	@Column(name="user_name")
 	public String getUserName() {
 		return userName;
@@ -124,11 +124,11 @@ public class MessageBoard implements Serializable{
 	}
 
 	@Column(name="is_use")
-	public boolean isUse() {
+	public boolean getIsUse() {
 		return isUse;
 	}
 
-	public void setUse(boolean isUse) {
+	public void setIsUse(boolean isUse) {
 		this.isUse = isUse;
 	}
 	

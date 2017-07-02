@@ -225,17 +225,17 @@ public class HomeController extends BaseController{
     	long typeId = Convert.strToLong(request.getParameter("typeId"), -1);
     	String searchDate = request.getParameter("searchDate");
 		try{
-			List<Link> linkList = linkServiceImpl.getLinkList();
-			List<Map<String,Integer>> dateList = blogServiceImpl.getBlogDate();
-			Map<String,Integer> typeList = blogServiceImpl.getBlogType();
-			Blogger blogger = bloggerServiceImpl.getBloggerInfoById(1);
+			List<Link> links = linkServiceImpl.getLinkList();
+			Map<String,String> dateList = blogServiceImpl.getBlogDate();
+			Map<String,String> typeList = blogServiceImpl.getBlogType();
+			Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
 			List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("blogger", blogger);
-			map.put("links", linkList);
-			map.put("blogDate", dateList);
-			map.put("typeBlogs", typeList);
+			map.put("links", links);
+			map.put("dateList", dateList);
+			map.put("typeList", typeList);
 			map.put("currPage", currPage);
 			map.put("typeId", typeId);
 			map.put("searchDate", searchDate);

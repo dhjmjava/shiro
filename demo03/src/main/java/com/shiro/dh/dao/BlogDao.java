@@ -25,5 +25,6 @@ import com.shiro.dh.entity.Blog;
  */
 public interface BlogDao extends JpaRepository<Blog,Long>,BlogCustom{
 
+	
 }
   

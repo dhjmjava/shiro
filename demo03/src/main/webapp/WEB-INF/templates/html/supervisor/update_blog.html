@@ -19,8 +19,15 @@
  <script type="text/javascript"  th:inline="javascript">
     /* 引入百度ueditor */
 	var ue = UE.getEditor("content");
-    var blog=[[${blog}]];
+    var id=[[${id}]];
     $(function(){
+    	$.post('/supervisor/findById',{"id":id},function(data){
+    		//加载表单
+			if(data!=null){
+				$("#blogFrom").form('load', data);
+			}
+		});
+    	
  	   $("#smBtn").on("click",function(){
  	    	var datas =$("#blogFrom").serializeObject();  
  	        datas.isUse=$("[name='isUse']").val();
@@ -41,30 +48,28 @@
 	  <input type="hidden" name="id" th:value="${blog.id}"/>
 	     <tr>
 		     <td style="text-align: right;width:10%"><label for="title">标题:</label></td>
-		     <td><input id="title" th:value="${blog.title}"  class="easyui-validatebox datas" data-options="missingMessage:'标题不能为空！'" type="text" name="title" required="true"/></td>
+		     <td><input id="title" name="title" class="easyui-validatebox datas" data-options="missingMessage:'标题不能为空！'" type="text" required="true"/></td>
 	     </tr>
 	     <tr>
 		     <td style="text-align: right"><label for="blogType">所属类别:</label></td>
-		     <td><select class="easyui-validatebox datas" id="blogType">
-                   <option th:each="type:${types}" selected="selected" th:if="${type.id == blog.blogType}" th:value="${type.id}" th:text="${type.name}"></option>
-                   <option th:each="type:${types}" th:if="${blog.blogType != type.id}" th:value="${type.id}" th:text="${type.name}"></option>
+		     <td><select class="easyui-validatebox datas" id="blogType" name="blogType">
 				</select>
 	          </td>
 	     </tr>
 	     <tr>
 		     <td style="text-align: right"><label for="keyword">关键词:</label></td>
-		     <td><input th:value="${blog.keyword}" class="easyui-validatebox datas" data-options="missingMessage:'多个关键词请用‘，’隔开！'" type="text" name="keyword" required="true"/></td>
+		     <td><input  class="easyui-validatebox datas" data-options="missingMessage:'多个关键词请用‘，’隔开！'" type="text" name="keyword" required="true"/></td>
 	     </tr>
 	      <tr>
 		     <td style="text-align: right"><label for="publishTime">发布时间:</label></td>
 		     <td>
-		      <input id="publishTime"  name="publishTime" class="datas Wdate" onclick="WdatePicker()" type="text" th:value="${#calendars.format(blog.publishTime,'yyyy-MM-dd')}"/>
+		      <input id="publishTime"  name="publishTime" class="datas Wdate" onclick="WdatePicker()" type="text"/>
 		     </td>
 	     </tr>
 	     <tr>
 		     <td style="text-align: right"><label for="readCount">阅读量:</label></td>
 		     <td>
-		      <input th:value="${blog.readCount}" class="datas" name="readCount" type="text"/>
+		      <input class="datas" name="readCount" type="text"/>
 		     </td>
 	     </tr>
 	     <tr>
@@ -76,7 +81,7 @@
 	     </tr>
 	     <tr>
 		     <td style="text-align: right"><label for="content">内容:</label></td>
-		     <td style="width:90%"> <textarea th:utext="${blog.content}" rows="25" cols="155" id="content" name="content" style="width：100%"></textarea></td>
+		     <td style="width:90%"> <textarea rows="25" cols="155" id="content" name="content" style="width：100%"></textarea></td>
 	     </tr>
 	     <tr style="border:1px solid blue">
 		     <td colspan="2" style="text-align: center">
