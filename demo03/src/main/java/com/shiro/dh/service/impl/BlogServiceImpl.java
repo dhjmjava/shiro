@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import com.shiro.dh.entity.Blog;
 import com.shiro.dh.service.BaseService;
 import com.shiro.dh.service.BlogService;
+import com.shiro.dh.util.DateUtil;
 import com.shiro.dh.util.Page;
+import com.shiro.dh.util.StringUtil;
 
 /**  
  * ClassName:BlogServiceImpl <br/>  
@@ -51,13 +53,20 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	 * Date:2017年7月1日上午11:37:14
 	 */
 	@Override
-	public Page<Blog> getBlogPage(int offset, int limit, long blogType, String time) {
+	public Page<Blog> getBlogPage(int offset, int limit, int blogType, String time) {
 		List<Blog> list = blogDao.queryPagination(offset,limit,blogType,time);
 		Page<Blog> page = new Page<Blog>();
 		page.page = list;
 		page.currPage = offset;
 		page.pageSize = limit;
-		page.totalCount = (int)blogDao.count();
+		if(!StringUtil.isBlank(time)){
+			String[] dates = DateUtil.getDate(time);
+			page.totalCount=blogDao.queryBlogByPublishTime(String.valueOf(dates[0]), String.valueOf(dates[1]));
+		}else if(blogType>0){
+			page.totalCount=blogDao.queryBlogByBlogType(blogType);
+		}else{
+			page.totalCount=(int) blogDao.count();
+		}
 		page.setPageNumber(page.totalCount);
 		
 		return page;

@@ -9,13 +9,12 @@
 package com.shiro.dh;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.Bean;
+
+import com.shiro.dh.util.SpringUtil;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
@@ -25,9 +24,21 @@ public class Application extends SpringBootServletInitializer{
         application.run(args);
 	}
 
+	/**
+	 * 
+	 * configure:外部容器启动，需实现此方法. <br/>   
+	 *   
+	 * @param application
+	 * @return  
+	 * @author daihui
+	 * Date:2017年7月3日下午4:16:18
+	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
 	}
+	
+	@Bean
+    public SpringUtil springUtil(){return new SpringUtil();}
 
 }

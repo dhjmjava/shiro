@@ -10,14 +10,15 @@
 package com.shiro.dh.dao.impl;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
@@ -54,7 +55,7 @@ public class BlogDaoImpl implements BlogCustom{
 	@Override
 
 	public Map<String,String> queryByDate() {	  
-		String sql= "select count(DATE_FORMAT(publish_time,'%Y-%m')),DATE_FORMAT(publish_time,'%Y-%m') from t_blog group by DATE_FORMAT(publish_time,'%Y-%m')";
+		String sql= "select count(DATE_FORMAT(publish_time,'%Y-%m')),DATE_FORMAT(publish_time,'%Y-%m') from t_blog group by publish_time desc";
         List<Object[]> result = em.createNativeQuery(sql).getResultList();
         Map<String,String> resultMap = new HashMap<String,String>();
         for (Object[] obj : result) {
@@ -102,17 +103,17 @@ public class BlogDaoImpl implements BlogCustom{
 	@Override
 	public List<Blog> queryPagination(int offset, int limit, long blogType, String time) {
 		String sql="select {a.*},b.name as blogTypeName from t_blog a left join t_blog_types b on a.blog_type = b.id where 1=1";
-		Map<String,String> conditions = new HashMap<String,String>();
+		Map<String,Object> conditions = new HashMap<String,Object>();
 		if(blogType>0){
 			sql+=" and a.blog_type=:blogType";
 			conditions.put("blogType",String.valueOf(blogType));
 		}
 		
 		if(!StringUtil.isBlank(time)){
-			sql+="and publish_time between :startTime and :endTime";
+			sql+="and a.publish_time between :startTime and :endTime";
 			String[] dates = DateUtil.getDate(time);
-			conditions.put("startTime",String.valueOf(dates[0]));
-			conditions.put("endTime",String.valueOf(dates[1]));
+			conditions.put("startTime",dates[0]);
+			conditions.put("endTime",dates[1]);
 		}
 		sql+=" order by a.publish_time desc"; 
 		Query query = em.createNativeQuery(sql);

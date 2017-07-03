@@ -9,8 +9,6 @@
   
 package com.shiro.dh.util;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**  
  * ClassName:Convert <br/>  

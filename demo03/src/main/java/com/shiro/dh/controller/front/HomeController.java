@@ -9,7 +9,6 @@
   
 package com.shiro.dh.controller.front;  
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +36,6 @@ import com.shiro.dh.util.Convert;
 import com.shiro.dh.util.ErrorInfo;
 import com.shiro.dh.util.IpUtil;
 import com.shiro.dh.util.Page;
-import com.shiro.dh.util.StringUtil;
 
 /**  
  * ClassName:indexController <br/>  
@@ -71,7 +67,7 @@ public class HomeController extends BaseController{
     	String typeId = request.getParameter("typeId");
     	String searchDate = request.getParameter("searchDate");
     	
-    	Page<Blog> page = blogServiceImpl.getBlogPage(Convert.strToInt(currPage,1),Constants.TEN,Convert.strToLong(typeId,-1),searchDate);
+    	Page<Blog> page = blogServiceImpl.getBlogPage(Convert.strToInt(currPage,1),Constants.TEN,Convert.strToInt(typeId,-1),searchDate);
     	model.addAttribute("typeId", typeId);
     	model.addAttribute("searchDate", searchDate);
     	model.addAttribute("page", page);
@@ -84,7 +80,7 @@ public class HomeController extends BaseController{
      * blogInfo:(文章详情). <br/>   
      *  
      * @author daihui  
-     * @param bi 博客id
+     * @param bi
      * @param model
      * @return  
      * @since JDK 1.7

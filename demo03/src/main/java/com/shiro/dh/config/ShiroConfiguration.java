@@ -46,15 +46,7 @@ public class ShiroConfiguration {
         //后台登录验证的url，可以匿名访问
         filterChainDefinitionMap.put("/supervisor/dologin", "anon");
         //配置退出过滤器,  
-        filterChainDefinitionMap.put("/supervisor/logout", "logout"); 
-        //配置静态文件可以匿名访问
-        /*filterChainDefinitionMap.put("/bootstrap3/**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/datimeday/**", "anon");
-        filterChainDefinitionMap.put("/easyui/**", "anon");
-        filterChainDefinitionMap.put("/images/**", "anon");
-        filterChainDefinitionMap.put("/javascript/**", "anon");
-        filterChainDefinitionMap.put("/utf8-jsp/**", "anon");*/
+        filterChainDefinitionMap.put("/supervisor/logout", "logout");
         //配置前台页面可以匿名访问
         filterChainDefinitionMap.put("/**", "anon");//首页
         

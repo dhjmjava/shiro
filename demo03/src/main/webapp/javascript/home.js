@@ -19,10 +19,10 @@ $(function(){
 	    		  commLink=commLink+'<li><span><a href='+value.url+' target="_blank">'+value.name+'</a></span></li>'
 	    	  })
 	    	  $.each(dateList,function(key,value){
-	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="dateSearch(this)" month="'+key+'">'+key+'</a>&nbsp;(<span>'+value+'</span>)</span></li>';
+	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="query()" month="'+key+'">'+key+'</a>&nbsp;(<span>'+value+'</span>)</span></li>';
 	    	  })
 	    	  $.each(typeList,function(key,value){
-	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="query(this)">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
+	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="query()">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
 	    	  })
 	    	   $.each(msgs,function(n,value){
 	    		   msgStr=msgStr+'<li><span>'+(n+1)+'、'+value.msgContent+'</span></li>';

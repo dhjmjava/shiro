@@ -44,7 +44,7 @@ public interface BlogService {
 	 * @param searchDate
 	 * @return
 	 */
-	 Page<Blog> getBlogPage(int currPage,int pageSize,long typeId,String searchDate);
+	 Page<Blog> getBlogPage(int currPage,int pageSize,int typeId,String searchDate);
 	 
 	 List<Blog> findAll();
 	

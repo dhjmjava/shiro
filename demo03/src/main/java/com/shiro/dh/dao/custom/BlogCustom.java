@@ -34,7 +34,7 @@ public interface BlogCustom {
 	 * @author daihui
 	 * Date:2017年6月28日下午4:28:16
 	 */
-	public Map<String,String> queryByDate();
+	Map<String,String> queryByDate();
 
 	/**
 	 * queryByType:根据类别查询. <br/>   
@@ -43,7 +43,7 @@ public interface BlogCustom {
 	 * @author daihui
 	 * Date:2017年6月28日下午4:28:42
 	 */
-	public Map<String,String> queryByType();
+	Map<String,String> queryByType();
 	
 	/**
 	 * queryPagination:根据条件分页查询. <br/>   
@@ -56,7 +56,7 @@ public interface BlogCustom {
 	 * @param limit 
 	 * @param offset 
 	 */
-	public List<Blog> queryPagination(int offset, int limit, long blogType, String time);
+	List<Blog> queryPagination(int offset, int limit, long blogType, String time);
 
 }
   
