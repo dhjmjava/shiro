@@ -9,7 +9,6 @@
 package com.shiro.dh.service.impl;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 

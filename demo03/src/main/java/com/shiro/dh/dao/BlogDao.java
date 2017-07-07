@@ -9,6 +9,8 @@
   
 package com.shiro.dh.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -31,5 +33,7 @@ public interface BlogDao extends JpaRepository<Blog,Long>,BlogCustom{
    	
    	@Query(value="select count(1) from t_blog a where a.publish_time between ?1 and ?2",nativeQuery=true)
 	int queryBlogByPublishTime(String startTime,String endTime);
+   	
+   	List<Blog> findBlogByIsUse(boolean isUse);
 }
   

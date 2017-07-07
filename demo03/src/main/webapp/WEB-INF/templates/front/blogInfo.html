@@ -37,7 +37,7 @@
 		<div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 	   </div>
 		<div class="blog_info">
-			发布时间：<span th:text="${#calendars.format(blog.publishTime,'yyyy年MM月dd日  HH:mm:ss')}"></span>&nbsp;&nbsp;博客类别：&nbsp;&nbsp;阅读(<span th:text="${blog?.readCount}"></span>)
+			发布时间：<span th:text="${#calendars.format(blog.publishTime,'yyyy年MM月dd日  HH:mm:ss')}"></span>&nbsp;&nbsp;阅读(<span th:text="${blog?.readCount}"></span>)
 		</div>
 		<div class="blog_content" th:utext="${blog.content}"></div>
 		<div class="blog_keyWord">
@@ -94,12 +94,6 @@
 		<div id="foot" th:include="common/footer :: foot"></div>
 	</div>
 	
-	<form action="/blog" accept-charset="UTF-8" method="GET"  id="homeForm">
-		<input type="hidden" name="typeId" id="typeId"/>
-		<input type="hidden" name="searchDate" id="searchDate"/>
-		<input type="hidden" name="currPage" id="currPage"/>
-    </form>
-    
 	<script th:src="@{/javascript/home.js}"></script>
 	<script th:src="@{/javascript/blogInfo.js}"></script>
 	<script type="text/javascript" th:inline="javascript">

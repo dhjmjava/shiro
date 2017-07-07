@@ -10,7 +10,6 @@
 package com.shiro.dh.dao.custom;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +33,7 @@ public interface BlogCustom {
 	 * @author daihui
 	 * Date:2017年6月28日下午4:28:16
 	 */
-	Map<String,String> queryByDate();
+	List<Object[]> queryByDate();
 
 	/**
 	 * queryByType:根据类别查询. <br/>   
@@ -43,7 +42,7 @@ public interface BlogCustom {
 	 * @author daihui
 	 * Date:2017年6月28日下午4:28:42
 	 */
-	Map<String,String> queryByType();
+	List<Object[]> queryByType();
 	
 	/**
 	 * queryPagination:根据条件分页查询. <br/>   

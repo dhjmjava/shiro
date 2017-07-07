@@ -11,7 +11,6 @@ package com.shiro.dh.service;
 
 
 import java.util.List;
-import java.util.Map;
 
 import com.shiro.dh.entity.Blog;
 import com.shiro.dh.util.Page;
@@ -29,12 +28,12 @@ import com.shiro.dh.util.Page;
 public interface BlogService {
   
 	/**
-	 * 首页的分页查询博客数据
+	 * 获取博客数据
 	 * @param offset
 	 * @param limit
 	 * @return
 	 */
-	 Page<Blog> getBlogList(int offset,int limit);
+	 List<Blog> getBlogList();
 	
 	/**
 	 * 根据条件查询博客数据
@@ -53,7 +52,7 @@ public interface BlogService {
 	 * @return
 	 */
 
-	 Map<String, String> getBlogDate();
+	 List<Object[]> getBlogDate();
 
 	
 	/**
@@ -61,7 +60,7 @@ public interface BlogService {
 	 * @return
 	 */
 
-	 Map<String,String> getBlogType();
+	 List<Object[]> getBlogType();
 	
 	/**
 	 * 根据id删除博客
@@ -83,6 +82,17 @@ public interface BlogService {
 	 * @return
 	 */
 	 Blog getBlogById(long id);
+
+	/**
+	 * 
+	 * incrReadCount:浏览量+1. <br/>   
+	 *  
+	 * @author daihui  
+	 * @param bi  
+	 * @since JDK 1.7 
+	 * Date: 2017年7月6日 下午11:53:30 <br/>
+	 */
+	void incrReadCount(long bi);
 	
 }
   

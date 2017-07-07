@@ -13,14 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.hibernate.SQLQuery;
-import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,14 +51,11 @@ public class BlogDaoImpl implements BlogCustom{
 	@SuppressWarnings("unchecked")
 	@Override
 
-	public Map<String,String> queryByDate() {	  
-		String sql= "select count(DATE_FORMAT(publish_time,'%Y-%m')),DATE_FORMAT(publish_time,'%Y-%m') from t_blog group by publish_time desc";
+	public List<Object[]> queryByDate() {	  
+		String sql= "select count(DATE_FORMAT(publish_time,'%Y-%m')),DATE_FORMAT(publish_time,'%Y-%m') from t_blog group by DATE_FORMAT(publish_time,'%Y-%m') order by DATE_FORMAT(publish_time,'%Y-%m') desc";
         List<Object[]> result = em.createNativeQuery(sql).getResultList();
-        Map<String,String> resultMap = new HashMap<String,String>();
-        for (Object[] obj : result) {
-        	resultMap.put(obj[1].toString(),obj[0].toString());
-		}
-		return resultMap;
+        
+		return result;
 		
 	}
 
@@ -75,16 +69,16 @@ public class BlogDaoImpl implements BlogCustom{
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String,String> queryByType() {
+	public List<Object[]> queryByType() {
 		  
-		String sql= "select b.`name`,COUNT(a.blog_type) from t_blog a left join t_blog_types b on a.blog_type=b.id GROUP BY a.blog_type";
+		String sql= "select b.`name`,COUNT(a.blog_type),a.blog_type from t_blog a left join t_blog_types b on a.blog_type=b.id GROUP BY a.blog_type";
         List<Object[]> result = em.createNativeQuery(sql).getResultList();
-        Map<String,String> resultMap = new HashMap<String,String>();
+        /*Map<String,String> resultMap = new HashMap<String,String>();
         for (Object[] obj : result) {
-        	resultMap.put(obj[1].toString(),obj[0].toString());
-		}
+        	resultMap.put(obj[0].toString(),obj[1].toString());
+		}*/
         
-		return resultMap;  
+		return result;  
 		
 	}
 
@@ -110,7 +104,7 @@ public class BlogDaoImpl implements BlogCustom{
 		}
 		
 		if(!StringUtil.isBlank(time)){
-			sql+="and a.publish_time between :startTime and :endTime";
+			sql+=" and a.publish_time between :startTime and :endTime";
 			String[] dates = DateUtil.getDate(time);
 			conditions.put("startTime",dates[0]);
 			conditions.put("endTime",dates[1]);

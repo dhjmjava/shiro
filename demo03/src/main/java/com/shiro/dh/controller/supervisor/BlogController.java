@@ -10,7 +10,7 @@
 package com.shiro.dh.controller.supervisor;  
 
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,9 +73,8 @@ public class BlogController extends BaseController{
 	@RequiresPermissions("blog:add")
 	public ErrorInfo submitBlog(Blog blog) throws Exception{
 		ErrorInfo error  = new ErrorInfo();
-		blog.setPublishTime(Calendar.getInstance().getTime());
+		blog.setPublishTime(new Date());
 		Blog result = blogServiceImpl.saveOrUpdateBlog(blog);
-		
 		index.index(result);
 		return error;
 	}
@@ -85,8 +84,12 @@ public class BlogController extends BaseController{
 	@RequiresPermissions("blog:update")
 	public ErrorInfo submitUpdate(Blog blog){
 		ErrorInfo error  = new ErrorInfo();
-		blogServiceImpl.saveOrUpdateBlog(blog);
-		
+		Blog saveOrUpdateBlog = blogServiceImpl.saveOrUpdateBlog(blog);
+		try {
+			index.updateIndex(saveOrUpdateBlog);
+		} catch (Exception e) {
+			e.printStackTrace();  
+		}
 		return error;
 	}
 	
@@ -103,6 +106,11 @@ public class BlogController extends BaseController{
 		ErrorInfo error = new ErrorInfo();
 		long bid = Convert.strToLong(id, -1);
 		blogServiceImpl.deleteBlog(bid);
+		try {
+			index.deleteIndex(bid);
+		} catch (Exception e) {
+			e.printStackTrace();  
+		}
 		return error;
 	}
 	

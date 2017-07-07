@@ -23,6 +23,7 @@
 	   $("#smBtn").on("click",function(){
 	    	var datas=$("#bloggerFrom").serializeObject();  
 			datas.id=id;
+			datas.describe=encodeURIComponent(datas.describe);
 	    	$.post('/supervisor/updateBloggerInfo',datas,function(data){
 				if(data.code==-1){
 					alert(data.msg);
@@ -32,20 +33,7 @@
 			});
 	    	
 	    }); 
-   }) 
-   function uploadPic(){  
-     if($("#file").val()==""){  
-         $.messager.alert("提示","请选择文件夹");  
-         return false;  
-     }  
-      $("#p").ajax({ 
-         url:"/supervisor/filesUpload", //请求url    
-         type:"post",  //提交方式    
-         success:function(data){ //提交成功的回调函数    
-             $.messager.alert("提示",data);  
-         }    
-     });    
- }  
+   })
  </script>
 	 <form id="bloggerFrom" method="post">
 	  <table id="bloggerTB" style="width:100%;border:1px solid red">

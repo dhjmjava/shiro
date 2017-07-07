@@ -208,8 +208,8 @@ public class HomeController extends BaseController{
 	public String common(HttpServletRequest request){
 		try{
 				List<Link> links = linkServiceImpl.getLinkList();
-				Map<String,String> dateList = blogServiceImpl.getBlogDate();
-				Map<String,String> typeList = blogServiceImpl.getBlogType();
+				List<Object[]> dateList = blogServiceImpl.getBlogDate();
+				List<Object[]> typeList = blogServiceImpl.getBlogType();
 				Blogger blogger=bloggerServiceImpl.getBloggerInfoById(1);
 				List<MessageBoard> msgs = messageBoardServiceImpl.queryAll();
 				

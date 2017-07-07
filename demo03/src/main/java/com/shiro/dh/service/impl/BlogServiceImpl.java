@@ -10,16 +10,21 @@
 package com.shiro.dh.service.impl;  
 
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shiro.dh.constants.Constants;
 import com.shiro.dh.entity.Blog;
 import com.shiro.dh.service.BaseService;
 import com.shiro.dh.service.BlogService;
+import com.shiro.dh.service.RedisService;
+import com.shiro.dh.util.Convert;
 import com.shiro.dh.util.DateUtil;
 import com.shiro.dh.util.Page;
 import com.shiro.dh.util.StringUtil;
+
+import redis.clients.jedis.Jedis;
 
 /**  
  * ClassName:BlogServiceImpl <br/>  
@@ -27,17 +32,26 @@ import com.shiro.dh.util.StringUtil;
  * Date:     2016-8-11 下午3:33:07 <br/>  
  * @author   Administrator  
  * @version    
- * @since    JDK 1.6  
+ * @since    JDK 1.7  
  * @see        
  */
 @Service
 public class BlogServiceImpl extends BaseService implements BlogService{
+	@Autowired
+	private RedisService redisServiceImpl;
 
+	/**
+	 * 
+	 * getBlogList:搜索缓存所需数据. <br/>   
+	 *  
+	 * @author daihui  
+	 * @return  
+	 * @since JDK 1.7 
+	 * Date: 2017年7月7日 下午11:28:03 <br/>
+	 */
 	@Override
-	public Page<Blog> getBlogList(int offset, int limit) {
-		  
-		return null;
-		
+	public List<Blog> getBlogList() {
+		return blogDao.findBlogByIsUse(true);
 	}
 
 	/**
@@ -74,12 +88,12 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 	}
 
 	@Override
-	public Map<String, String> getBlogDate() {
+	public List<Object[]> getBlogDate() {
 		return blogDao.queryByDate();
 	}
 
 	@Override
-	public Map<String,String> getBlogType() {
+	public List<Object[]> getBlogType() {
 
 		return blogDao.queryByType();
 		
@@ -111,6 +125,26 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 		
 		return blogDao.findAll();
 		
+	}
+
+	/**
+	 * 
+	 * incrReadCount:缓存浏览量+1. <br/>   
+	 *  
+	 * @author daihui  
+	 * @param bi  
+	 * @since JDK 1.7 
+	 * Date: 2017年7月7日 下午11:29:39 <br/>
+	 */
+	@Override
+	public void incrReadCount(long bi) {
+		 Jedis jedis = redisServiceImpl.getResource();
+		  String value = jedis.get(Constants.BLOG+bi);
+		  if(null != value){
+			  jedis.set(Constants.BLOG+bi, String.valueOf(Convert.strToLong(value, 0)+1));
+		  }else{
+			  redisServiceImpl.returnResource(jedis);
+		  }
 	}
 
 

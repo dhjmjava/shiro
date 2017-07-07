@@ -18,11 +18,11 @@ $(function(){
 	    	  $.each(links,function(n,value){
 	    		  commLink=commLink+'<li><span><a href='+value.url+' target="_blank">'+value.name+'</a></span></li>'
 	    	  })
-	    	  $.each(dateList,function(key,value){
-	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="query()" month="'+key+'">'+key+'</a>&nbsp;(<span>'+value+'</span>)</span></li>';
+	    	  $.each(dateList,function(n,value){
+	    		  commDate=commDate+'<li><span><a href="javascript:;" onclick="query(false,false,\''+value[1]+'\',null)" month="'+value[1]+'">'+value[1]+'</a>&nbsp;(<span>'+value[0]+'</span>)</span></li>';
 	    	  })
-	    	  $.each(typeList,function(key,value){
-	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="query()">'+value+'</a>&nbsp; (<span>'+key+'</span>)</span></li>';
+	    	  $.each(typeList,function(n,value){
+	    		  commtype=commtype+'<li><span><a href="javascript:;" onclick="query(false,false,null,'+value[2]+')">'+value[0]+'</a>&nbsp; (<span>'+value[1]+'</span>)</span></li>';
 	    	  })
 	    	   $.each(msgs,function(n,value){
 	    		   msgStr=msgStr+'<li><span>'+(n+1)+'、'+value.msgContent+'</span></li>';
@@ -38,7 +38,8 @@ $(function(){
 	  });
 }) 
 
-function query(pageUp,pageDown,blogType,time){
+function query(pageUp,pageDown,time,blogType){
+	debugger
 	if(pageUp){
 		if(currPage == 1 || currPage==null){
 			$("#pageUp").attr("class","disabled");
@@ -52,6 +53,12 @@ function query(pageUp,pageDown,blogType,time){
 			return ;
 		}
 		$("#currPage").val( parseInt(currPage)+1);
+	}
+	if(blogType!=null&&blogType!=""){
+		$("#typeId").val(blogType);
+	}
+	if(time!=null&&time!=""){
+		$("#searchDate").val(time);
 	}
 	$("#homeForm").submit();
 }
@@ -82,7 +89,6 @@ function typeSearch(fn){
 	if(i==1){
 		$("#currPage").val(1);
 	}
-	debugger
 	var tid = $(fn).attr("tid");
 	$("#typeId").val(tid);
 	$("#searchDate").val('');
