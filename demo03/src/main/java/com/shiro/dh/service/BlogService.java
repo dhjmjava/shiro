@@ -82,17 +82,6 @@ public interface BlogService {
 	 * @return
 	 */
 	 Blog getBlogById(long id);
-
-	/**
-	 * 
-	 * incrReadCount:浏览量+1. <br/>   
-	 *  
-	 * @author daihui  
-	 * @param bi  
-	 * @since JDK 1.7 
-	 * Date: 2017年7月6日 下午11:53:30 <br/>
-	 */
-	void incrReadCount(long bi);
 	
 }
   

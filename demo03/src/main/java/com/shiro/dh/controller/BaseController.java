@@ -18,7 +18,6 @@ import com.shiro.dh.service.BlogTypesService;
 import com.shiro.dh.service.BloggerService;
 import com.shiro.dh.service.LinkService;
 import com.shiro.dh.service.MessageBoardService;
-import com.shiro.dh.service.RedisService;
 
 /**
  * @author Administrator
@@ -43,9 +42,6 @@ public class BaseController {
 	
 	@Autowired
 	protected BlogCommentsService blogCommentsServiceImpl;
-
-	@Autowired
-	protected RedisService redisServiceImpl;
 	
 	@Autowired
 	protected MessageBoardService messageBoardServiceImpl;

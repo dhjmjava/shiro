@@ -11,20 +11,14 @@ package com.shiro.dh.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shiro.dh.constants.Constants;
 import com.shiro.dh.entity.Blog;
 import com.shiro.dh.service.BaseService;
 import com.shiro.dh.service.BlogService;
-import com.shiro.dh.service.RedisService;
-import com.shiro.dh.util.Convert;
 import com.shiro.dh.util.DateUtil;
 import com.shiro.dh.util.Page;
 import com.shiro.dh.util.StringUtil;
-
-import redis.clients.jedis.Jedis;
 
 /**  
  * ClassName:BlogServiceImpl <br/>  
@@ -37,8 +31,6 @@ import redis.clients.jedis.Jedis;
  */
 @Service
 public class BlogServiceImpl extends BaseService implements BlogService{
-	@Autowired
-	private RedisService redisServiceImpl;
 
 	/**
 	 * 
@@ -126,28 +118,6 @@ public class BlogServiceImpl extends BaseService implements BlogService{
 		return blogDao.findAll();
 		
 	}
-
-	/**
-	 * 
-	 * incrReadCount:缓存浏览量+1. <br/>   
-	 *  
-	 * @author daihui  
-	 * @param bi  
-	 * @since JDK 1.7 
-	 * Date: 2017年7月7日 下午11:29:39 <br/>
-	 */
-	@Override
-	public void incrReadCount(long bi) {
-		 Jedis jedis = redisServiceImpl.getResource();
-		  String value = jedis.get(Constants.BLOG+bi);
-		  if(null != value){
-			  jedis.set(Constants.BLOG+bi, String.valueOf(Convert.strToLong(value, 0)+1));
-		  }else{
-			  redisServiceImpl.returnResource(jedis);
-		  }
-	}
-
-
 
 }
   

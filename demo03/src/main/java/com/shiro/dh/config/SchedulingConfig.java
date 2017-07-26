@@ -9,16 +9,12 @@
   
 package com.shiro.dh.config;  
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.shiro.dh.entity.Blog;
 import com.shiro.dh.service.BlogService;
-import com.shiro.dh.service.RedisService;
 
 /**  
  * ClassName:SchedulingConfig <br/>  
@@ -31,8 +27,7 @@ import com.shiro.dh.service.RedisService;
 @EnableScheduling //启用定时任务
 public class SchedulingConfig {
 	
-	@Autowired
-	private RedisService redisServiceImpl;
+	
 	@Autowired
 	private BlogService blogServiceImpl;
 	
@@ -44,7 +39,7 @@ public class SchedulingConfig {
 	//@Scheduled(cron = "10 * * * * ?") //每10s执行一次 
 	//@Scheduled(fixedRate=10000) //每隔10秒执行此任务
 	public void setDataToDB(){
-		Set<String> keySet = redisServiceImpl.getKeys();
+		/*Set<String> keySet = redisServiceImpl.getKeys();
 		Blog blog = new Blog(); 
 		for(String str:keySet){
 			String value = redisServiceImpl.get(str);
@@ -52,7 +47,7 @@ public class SchedulingConfig {
 			blog.setId(Long.valueOf(key));
 			blog.setReadCount(Integer.valueOf(value));
 			blogServiceImpl.saveOrUpdateBlog(blog);
-		}
+		}*/
 	}
 
 }
